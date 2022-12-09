@@ -1,0 +1,77 @@
+<div class="games-list-container">
+  <div class="games-list-items">
+    <a
+      *ngFor="
+        let item of cardContent
+          | paginate : { itemsPerPage: 12, currentPage: page };
+        let i = index
+      "
+      (click)="click(item)"
+    >
+      <div class="live-game-card">
+        <h6 class="gameSchedule">
+          {{ item.startTime | date : "dd/MM/YYYY - HH:mm" }}
+        </h6>
+        <h5 class="leagueTitle">{{ item.league.name }}</h5>
+        <div class="live-game-card-content">
+          <div class="live-game-card-team">
+            <img
+              class="live-game-card-team-image"
+              [src]="item.match.teams[0].image"
+              alt="Bay State College"
+            /><span class="live-game-card-title">{{
+              item.match.teams[0].name | titlecase
+            }}</span>
+          </div>
+          <h3 class="vs">{{ item.match.teams[0].result.gameWins }}</h3>
+          <h3 class="vs">VS</h3>
+          <h3 class="vs">{{ item.match.teams[1].result.gameWins }}</h3>
+          <!-- <div class="score">
+          </div> -->
+          <div class="live-game-card-team">
+            <img
+              class="live-game-card-team-image"
+              [src]="item.match.teams[1].image"
+              alt="Bay State College"
+            /><span class="live-game-card-title">{{
+              item.match.teams[1].name
+            }}</span>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="pagination" *ngIf="cardContent.length > 12">
+  <pagination-template #p="paginationApi" (pageChange)="page = $event">
+    <div class="custom-pagination">
+      <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+        <a class="previous" *ngIf="!p.isFirstPage()" (click)="p.previous()"
+          ><span> < </span></a
+        >
+      </div>
+
+      <div
+        *ngFor="let page of p.pages"
+        [class.current]="p.getCurrent() === page.value"
+      >
+        <a
+          class="otherPage"
+          (click)="p.setCurrent(page.value)"
+          *ngIf="p.getCurrent() !== page.value"
+        >
+          <span>{{ page.label }}</span>
+        </a>
+        <div class="currentPage" *ngIf="p.getCurrent() === page.value">
+          <span>{{ page.label }}</span>
+        </div>
+      </div>
+
+      <div class="pagination-next" [class.disabled]="p.isLastPage()">
+        <a class="next" *ngIf="!p.isLastPage()" (click)="p.next()"
+          ><span> > </span></a
+        >
+      </div>
+    </div>
+  </pagination-template>
+</div>

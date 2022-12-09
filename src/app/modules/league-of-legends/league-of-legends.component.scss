@@ -1,0 +1,8 @@
+::ng-deep .ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title{
+  &:hover{
+    background-color: var(--green-black);
+    transition: 0.5s;
+    color: var(--background);
+  }
+}
+

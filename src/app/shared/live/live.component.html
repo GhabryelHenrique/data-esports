@@ -1,0 +1,18 @@
+<div class="main px-3 py-3 live">
+  <div class="loading" *ngIf="loading">
+    <div class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+  <div class="content" *ngIf="liveGame?.length > 0">
+    <div class="gamestate">
+      <span class="liveText">AO VIVO</span>
+      <div class="gamestate-bg"></div>
+    </div>
+    <hr />
+    <h2>
+      {{ game }}
+    </h2>
+    <card-match [cardContent]="liveGame" [game]="game"></card-match>
+  </div>
+</div>

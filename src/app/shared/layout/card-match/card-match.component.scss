@@ -1,0 +1,20 @@
+.leagueTitle {
+  margin-bottom: 15px;
+}
+
+.live-game-card-content > h1 {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  color: var(--text);
+}
+
+.pagination {
+  margin: 2rem;
+  justify-content: center;
+}
+
+.score {
+  display: flex;
+  flex-direction: row;
+}

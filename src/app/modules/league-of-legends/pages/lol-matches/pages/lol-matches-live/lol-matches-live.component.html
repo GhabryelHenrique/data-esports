@@ -1,0 +1,67 @@
+<div class="main">
+  <div class="game-selector" *ngIf="totalGames!.length > 1">
+    <a
+      *ngFor="let gameChange of totalGames"
+      class="game-selector-item"
+      (click)="changeGame(gameChange)"
+      ><span class="{{ gameChange.state }}">{{ gameChange.number }}</span></a
+    >
+  </div>
+  <div class="match-odds-container">
+    <div class="team-odds team-oods-left">
+      <div class="teamInfo">
+        <img
+          [src]="matchDetails!.teams[0].image"
+          [alt]="matchDetails!.teams[0].name"
+        />
+        <h5>{{ matchDetails!.teams[0].name }}</h5>
+      </div>
+      <div class="teamScore">
+        <p class="score">{{ matchDetails!.teams[0].result.gameWins }}</p>
+      </div>
+    </div>
+    <h4 class="vs">VS</h4>
+    <div class="team-odds team-oods-right">
+      <div class="teamScore">
+        <p class="score">{{ matchDetails!.teams[1].result.gameWins }}</p>
+      </div>
+      <div class="teamInfo">
+        <h5>{{ matchDetails!.teams[1].name }}</h5>
+        <img
+          [src]="matchDetails!.teams[1].image"
+          [alt]="matchDetails!.teams[1].image"
+        />
+      </div>
+    </div>
+  </div>
+  <div *ngIf="gameInfo" class="d-flex justify-content-center">
+    <app-game-information
+      style="width: 100%"
+      [gameInfo]="gameInfo"
+    ></app-game-information>
+  </div>
+  <app-player-card
+    [gameInfo]="gameInfo"
+    [gameFrame]="gameFrame"
+    [matchID]="matchID"
+  >
+    <!-- <iframe
+      title="twitchStream"
+      [src]="urlVideo | safe"
+      height="720"
+      width="1280"
+    >
+    </iframe> -->
+    <div class="ytVod" *ngFor="let gameVod of totalGames">
+      <iframe
+        *ngIf="gameVod.number === gameNumber"
+        height="720"
+        title=""
+        width="1280"
+        [src]="getUrlVod(gameVod.vods[0].parameter) | safe"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </app-player-card>
+</div>

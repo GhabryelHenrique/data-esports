@@ -1,0 +1,84 @@
+.match-odds-container {
+  display: flex;
+  padding: 2rem 0;
+  justify-content: space-around;
+}
+.team-odds {
+  max-width: 35%;
+  font-weight: 700;
+  color: var(--title);
+}
+.team-oods-left {
+  -webkit-clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 50%,
+    calc(100% - 10px) 100%,
+    0 100%
+  );
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 50%,
+    calc(100% - 10px) 100%,
+    0 100%
+  );
+  text-align: left;
+}
+.team-odds {
+  background: var(--card-color);
+  flex: 1 1;
+  display: flex;
+  justify-content: space-evenly;
+  border-radius: 0.25rem;
+}
+.partner-logo-container {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.team-odds > .teamInfo > img {
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: 0 1rem;
+  -webkit-filter: drop-shadow(0 0 0 #222);
+  filter: drop-shadow(0 0 0 #222);
+}
+.partner-logo,
+.team-odds {
+  align-items: center;
+}
+.team-oods-right {
+  padding: 1em 0;
+  -webkit-clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+  text-align: right;
+}
+.vs {
+  align-self: center;
+}
+
+.main {
+  background-color: var(--background);
+}
+
+.pd-8 {
+  display: flex;
+  justify-content: center;
+}
+
+.teamInfo {
+  display: flex;
+  align-items: center;
+}
+
+.score {
+  font-weight: 700;
+  height: 28px;
+  line-height: 28px;
+  font-size: 18px;
+}
+
+h4 {
+  color: var(--text);
+}

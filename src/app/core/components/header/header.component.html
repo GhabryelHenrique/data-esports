@@ -1,0 +1,37 @@
+<header class="main" style="gap: 7%">
+  <div class="d-flex" style="margin-left: 2%">
+    <img
+      class="logo"
+      src="../../../../assets/icons8-github.svg"
+      (click)="goTo('/')"
+    />
+  </div>
+  <div class="navMenu">
+    <div class="gameButton">
+      <button
+        class="btn"
+        nz-button
+        nz-dropdown
+        [routerLink]="['/lol']"
+        routerLinkActive="lol"
+      >
+        <img
+          src="../../../../assets/league-of-legends.svg"
+          alt="league-of-legends"
+        />
+      </button>
+      <button
+        class="btn"
+        nz-button
+        nz-dropdown
+        [routerLink]="['/valorant']"
+        routerLinkActive="lol"
+      >
+        <img
+          src="../../../../assets/icons8-valorant.svg"
+          alt="league-of-legends"
+        />
+      </button>
+    </div>
+  </div>
+</header>

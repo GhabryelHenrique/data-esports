@@ -1,0 +1,13 @@
+<div class="main px-3 py-3 live">
+  <div class="loading" *ngIf="loading">
+    <div class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+  <div class="content" *ngIf="scheduleMatches?.length > 0">
+    <card-match
+      [game]="'League of Legends'"
+      [cardContent]="scheduleMatches"
+    ></card-match>
+  </div>
+</div>

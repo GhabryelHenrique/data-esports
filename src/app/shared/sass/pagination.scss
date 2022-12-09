@@ -1,0 +1,59 @@
+.custom-pagination {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  gap: 5%;
+}
+
+.otherPage {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.next,
+.previous,
+.currentPage,
+.otherPage {
+  height: 30px;
+  width: 30px;
+}
+
+.next,
+.previous {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.currentPage {
+  background-color: var(--card-color);
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-previous,
+.currentPage,
+.pagination-next {
+  background-color: var(--card-color);
+  border-radius: 50%;
+  color: white;
+}
+
+.next {
+  top: -5%;
+  color: white;
+  left: 3%;
+  position: relative;
+}
+
+.previous {
+  position: relative;
+  top: -5%;
+  right: 3%;
+  color: white;
+}
