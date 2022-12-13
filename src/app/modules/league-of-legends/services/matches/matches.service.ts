@@ -1,9 +1,8 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { GameDetails } from '../../pages/models/lol-game-detais.model';
+import { GameDetails } from '../../modules/models/lol-game-detais.model';
 @Injectable({
   providedIn: 'root',
 })

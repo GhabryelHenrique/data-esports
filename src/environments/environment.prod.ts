@@ -1,8 +1,8 @@
 export const environment = {
-  production: true,
+  production: false,
   PANDASCORE: {
     BASE_URL: 'https://api.pandascore.co',
-    TOKEN_ACESS: 'Bearer rytahi7kZGVO9zpWHTT3cg7sBaifUKg_A8Pgb-pD0bpoMbcsTwc',
+    TOKEN_ACCESS: 'Bearer rytahi7kZGVO9zpWHTT3cg7sBaifUKg_A8Pgb-pD0bpoMbcsTwc',
   },
   LOLESPORTSAPI: {
     ESPORTS_API: 'https://esports-api.lolesports.com/persisted/gw',
@@ -17,4 +17,6 @@ export const environment = {
   },
   CHAMPIONS_URL:
     'https://ddragon.leagueoflegends.com/cdn/12.14.1/img/champion/',
+  TWITCH_URL_STREAM: 'https://player.twitch.tv/',
+  YOUTUBE_URL_VOD: 'https://www.youtube.com/embed',
 };

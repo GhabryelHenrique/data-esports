@@ -1,0 +1,16 @@
+<div class="main">
+  <app-game-selector
+    [totalGames]="totalGames"
+    [gameId]="gameId"
+    [matchID]="matchID"
+    (changeGameEvent)="gameChange($event)"
+  ></app-game-selector>
+  <app-game-header [matchDetails]="matchDetails"></app-game-header>
+  <iframe
+    *ngIf="twitchProvider.length >= 1"
+    [src]="urlVideo | safe"
+    height="720"
+    width="1280"
+  >
+  </iframe>
+</div>

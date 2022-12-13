@@ -1,4 +1,6 @@
-import { GameInformationModule } from './../../../../shared/layout/game-information/game-information.module';
+import { GameSelectorModule } from './../../../../shared/layout/game-selector/game-selector.module';
+import { GameHeaderModule } from './../../../../shared/layout/game-header/game-header.module';
+import { GameInformationModule } from './components/game-information/game-information.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LolMatchesComponent } from './lol-matches.component';
@@ -15,8 +17,10 @@ import { AuthorizationTokenModule } from 'src/app/core/interceptors/authorizatio
     NzTableModule,
     PlayerCardModule,
     AuthorizationTokenModule,
-    GameInformationModule,
+    GameHeaderModule,
     PipesModule,
+    GameInformationModule,
+    GameSelectorModule,
   ],
   declarations: [LolMatchesComponent, LolMatchesLiveComponent],
 })

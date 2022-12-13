@@ -4,10 +4,11 @@
       <span class="sr-only"></span>
     </div>
   </div>
-  <div class="content" *ngIf="scheduleMatches?.length > 0">
+  <div class="content" *ngIf="dataSource!.length > 0">
     <card-match
-      [game]="'League of Legends'"
-      [cardContent]="scheduleMatches"
+      [game]="game"
+      [isHistory]="isHistory"
+      [cardContent]="dataSource"
     ></card-match>
   </div>
 </div>

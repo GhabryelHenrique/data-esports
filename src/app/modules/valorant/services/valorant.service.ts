@@ -6,28 +6,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ValorantService {
-  baseUrl = environment.VALORANTESPORTSAPI.API_HOST;
-  tokenAccess = environment.VALORANTESPORTSAPI.TOKEN_ACCESS;
+  baseUrl = environment.VALORANTESPORTSAPI.ESPORTS_API;
 
   constructor(private http: HttpClient) {}
 
   getLiveGames() {
-    const httpOptions = new HttpHeaders({
-      'X-RapidAPI-Key': this.tokenAccess,
-      'X-RapidAPI-Host': this.baseUrl,
-    });
-    return this.http.get(`https://${this.baseUrl}/live`, {
-      headers: httpOptions,
-    });
+    return this.http.get(`https://${this.baseUrl}/getVods?hl=pt-BR&sport=val`);
   }
 
   getGamesDetails(id: any) {
-    const httpOptions = new HttpHeaders({
-      'X-RapidAPI-Key': this.tokenAccess,
-      'X-RapidAPI-Host': this.baseUrl,
-    });
-    return this.http.get(`https://${this.baseUrl}/event/${id}`, {
-      headers: httpOptions,
-    });
+    return this.http.get(`https://${this.baseUrl}/event/${id}`);
   }
 }

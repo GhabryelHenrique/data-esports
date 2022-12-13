@@ -11,6 +11,8 @@ export class ValorantMatchesLiveComponent implements OnInit {
   matchID: any;
   matchDetails: any;
   twitchProvider: any;
+  gameId: any;
+  totalGames: any;
   matchStream: any;
   urlVideo: any;
 
@@ -21,7 +23,11 @@ export class ValorantMatchesLiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => (this.matchID = params['id']));
-    this.getLiveGameDetails();
+    console.log(localStorage.getItem('matchDetails'));
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('matchDetails');
   }
 
   getLiveGameDetails() {
@@ -32,6 +38,8 @@ export class ValorantMatchesLiveComponent implements OnInit {
       this.repeat();
     });
   }
+
+  gameChange(event: any) {}
 
   twitchStream(id: any) {
     this.twitchProvider = this.matchStream.filter(function (obj: any) {

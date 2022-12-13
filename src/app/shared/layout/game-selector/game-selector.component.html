@@ -1,0 +1,8 @@
+<div class="game-selector" *ngIf="totalGames!.length > 1">
+  <a
+    *ngFor="let gameChange of totalGames"
+    class="game-selector-item"
+    (click)="changeGame(gameChange)"
+    ><span class="{{ gameChange.state }}">{{ gameChange.number }}</span></a
+  >
+</div>

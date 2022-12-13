@@ -1,3 +1,4 @@
+import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,7 +18,7 @@ import { AuthorizationTokenModule } from './interceptors/authorization-token.int
     NzCarouselModule,
     RouterModule,
   ],
-  declarations: [HeaderComponent],
-  exports: [HeaderComponent],
+  declarations: [HeaderComponent, FooterComponent],
+  exports: [HeaderComponent, FooterComponent],
 })
 export class CoreModule {}

@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: 'matches',
     loadChildren: () =>
-      import('./pages/lol-matches/lol-matches.module').then(
+      import('./modules/lol-matches/lol-matches.module').then(
         (m) => m.LolMatchesModule
       ),
   },

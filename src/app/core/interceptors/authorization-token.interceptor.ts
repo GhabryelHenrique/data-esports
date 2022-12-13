@@ -29,7 +29,26 @@ export class AuthorizationTokenInterceptor implements HttpInterceptor {
         ),
       });
     } else if (req.url.includes(environment.PANDASCORE.BASE_URL)) {
-      req.headers.set('Authorization', environment.PANDASCORE.TOKEN_ACCESS);
+      this.dupReq = req.clone({
+        headers: req.headers.set(
+          'Authorization',
+          environment.PANDASCORE.TOKEN_ACCESS
+        ),
+      });
+    } else if (req.url.includes(environment.RAPIDA_API.RAPIDA_API_HOST)) {
+      this.dupReq = req.clone({
+        headers: req.headers.set(
+          'X-RapidAPI-Key',
+          environment.RAPIDA_API.RAPIDA_API_TOKEN
+        ),
+      });
+    } else if (req.url.includes(environment.VALORANTESPORTSAPI.ESPORTS_API)) {
+      this.dupReq = req.clone({
+        headers: req.headers.set(
+          'x-api-key',
+          environment.VALORANTESPORTSAPI.TOKEN_ACCESS
+        ),
+      });
     }
     return next.handle(this.dupReq);
   }

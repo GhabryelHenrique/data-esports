@@ -1,0 +1,39 @@
+<div class="main">
+  <app-game-selector
+    [totalGames]="totalGames"
+    [gameId]="gameId"
+    [matchID]="matchID"
+    (changeGameEvent)="gameChange($event)"
+  ></app-game-selector>
+  <app-game-header [matchDetails]="matchDetails"></app-game-header>
+  <div *ngIf="gameInfo" class="d-flex justify-content-center">
+    <app-game-information
+      style="width: 100%"
+      [gameInfo]="gameInfo"
+    ></app-game-information>
+  </div>
+  <app-player-card
+    [gameInfo]="gameInfo"
+    [gameFrame]="gameFrame"
+    [matchID]="matchID"
+  >
+    <!-- <iframe
+      title="twitchStream"
+      [src]="urlVideo | safe"
+      height="720"
+      width="1280"
+    >
+    </iframe> -->
+    <div class="ytVod" *ngFor="let gameVod of totalGames">
+      <iframe
+        *ngIf="gameVod.number === gameNumber"
+        height="720"
+        title=""
+        width="1280"
+        [src]="getUrlVod(gameVod.vods[0].parameter) | safe"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </app-player-card>
+</div>

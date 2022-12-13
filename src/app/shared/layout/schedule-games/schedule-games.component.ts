@@ -1,3 +1,4 @@
+import { Event } from 'src/app/core/model/schedule.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { ScheduleGamesService } from './services/schedule-games.service';
 
@@ -7,34 +8,12 @@ import { ScheduleGamesService } from './services/schedule-games.service';
   styleUrls: ['./schedule-games.component.scss'],
 })
 export class ScheduleGamesComponent implements OnInit {
-  scheduleMatches: any;
-  loading = true;
-  @Input() mode: any;
+  @Input() loading = true;
+  @Input() game: string = '';
+  @Input() dataSource: Event[] = [];
+  @Input() isHistory: boolean = false;
 
   constructor(private scheduleGamesService: ScheduleGamesService) {}
 
-  ngOnInit(): void {
-    this.getSchedule();
-  }
-
-  getSchedule() {
-    this.scheduleGamesService.getSchedule().subscribe((res: any) => {
-      this.scheduleMatches = res.data.schedule.events.reverse();
-      this.getHistory();
-    });
-  }
-
-  getHistory() {
-    if (this.mode === 'Schedule') {
-      this.scheduleMatches = this.scheduleMatches.filter((obj: any) => {
-        return obj.state === 'unstarted';
-      });
-      this.loading = false;
-    } else {
-      this.scheduleMatches = this.scheduleMatches.filter((obj: any) => {
-        return obj.state === 'completed';
-      });
-      this.loading = false;
-    }
-  }
+  ngOnInit(): void {}
 }

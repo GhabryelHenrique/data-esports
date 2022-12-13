@@ -5,8 +5,8 @@ import { MatchesService } from 'src/app/modules/league-of-legends/services/match
 import { TwitchService } from '../../../../../../core/services/twitch/twitch.service';
 import { LiveMatchStatsService } from '../../../../services/live-match-stats/live-match-stats.service';
 import { GameDetails } from '../../../models/lol-game-detais.model';
-import { DataGameDetails } from '../../../models/lol-matches.model';
-import { Game, Match } from './../../../models/lol-matches.model';
+import { LolDataGameDetails } from '../../../models/lol-matches.model';
+import { LolGame, LolMatch } from './../../../models/lol-matches.model';
 
 @Component({
   selector: 'app-lol-matches-live',
@@ -17,14 +17,14 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
   matchID?: number;
   urlVideo: any;
   twitchProvider: any;
-  matchDetails?: Match;
+  matchDetails?: LolMatch;
   gameId: number | string = '';
   urlVod?: string;
   gameInfo?: GameDetails;
   matchStream: any[] = [];
   gameFrame: any;
   goRepeat = true;
-  totalGames?: Game[];
+  totalGames?: LolGame[];
   isHistory: boolean = false;
   gameNumber?: number;
 
@@ -46,14 +46,17 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
     this.getLiveGameDetails();
   }
 
-  changeGame(game: Game) {
+  gameChange(game: LolGame) {
+    this.getHistory(game.id);
+    this.gameNumber = game.number;
+  }
+
+  changeGame(game: LolGame) {
     if (game.id === this.gameId) return;
     if (game.state === 'inProgress') {
       this.router.navigateByUrl(`/lol/matches/live/${this.matchID}`);
     } else {
       this.router.navigateByUrl(`/lol/matches/history/${this.matchID}`);
-      this.getHistory(game.id);
-      this.gameNumber = game.number;
     }
   }
 
@@ -65,7 +68,7 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
   getLiveGameDetails() {
     this.liveMatchStatsService
       .getGameDetails({ hl: 'pt-BR', id: this.matchID })
-      .subscribe((res: DataGameDetails) => {
+      .subscribe((res: LolDataGameDetails) => {
         this.matchDetails = res.data.event.match;
         this.matchStream = res.data.event.streams;
         this.totalGames = res.data.event.match.games.filter((obj: any) => {

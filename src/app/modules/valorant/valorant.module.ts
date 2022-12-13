@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: 'matches',
     loadChildren: () =>
-      import('./pages/valorant-matches.module').then(
+      import('./modules/valorant-matches.module').then(
         (m) => m.ValorantMatchesModule
       ),
   },
