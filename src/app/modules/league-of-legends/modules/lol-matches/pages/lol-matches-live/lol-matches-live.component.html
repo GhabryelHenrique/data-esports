@@ -24,12 +24,11 @@
       width="1280"
     >
     </iframe> -->
-    <div class="ytVod" *ngFor="let gameVod of totalGames">
+    <div class="ytVod" *ngFor="let gameVod of totalGames"  [ngClass]="{ 'esconder': gameVod.number != gameNumber }">
       <iframe
-        *ngIf="gameVod.number === gameNumber"
-        height="720"
+        height="550"
         title=""
-        width="1280"
+        width="955"
         [src]="getUrlVod(gameVod.vods[0].parameter) | safe"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen

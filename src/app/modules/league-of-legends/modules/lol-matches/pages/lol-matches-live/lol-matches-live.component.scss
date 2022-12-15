@@ -72,6 +72,12 @@
   align-items: center;
 }
 
+.esconder {
+  display: none;
+  height: 0px;
+  width: 0px;
+}
+
 .score {
   font-weight: 700;
   height: 28px;

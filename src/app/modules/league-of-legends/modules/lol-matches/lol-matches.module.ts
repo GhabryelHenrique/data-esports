@@ -10,11 +10,13 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { PlayerCardModule } from 'src/app/shared/layout/player-card/player-card.module';
 import { PipesModule } from 'src/app/core/pipes/pipes.module';
 import { AuthorizationTokenModule } from 'src/app/core/interceptors/authorization-token.interceptor';
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 @NgModule({
   imports: [
     CommonModule,
     LoLMatchesRoutingModule,
     NzTableModule,
+    MatSelectCountryModule.forRoot('br'),
     PlayerCardModule,
     AuthorizationTokenModule,
     GameHeaderModule,

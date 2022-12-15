@@ -12,8 +12,11 @@ export const environment = {
   VALORANTESPORTSAPI: {
     ESPORTS_API:
       'https://esports-api.service.valorantesports.com/persisted/val',
-    TOKEN_ACCESS: '5dc3a273c0mshb9acfc0d39a05f0p14e7aejsn7d63e082e596',
-    API_HOST: 'valorant-esports.p.rapidapi.com',
+    TOKEN_ACCESS: '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z',
+  },
+  RAPIDA_API: {
+    RAPIDA_API_HOST: 'https://valorant-esports.p.rapidapi.com',
+    RAPIDA_API_TOKEN: '2e913d6562msh0a17adba110541bp183c9djsn667449c6eb50',
   },
   CHAMPIONS_URL:
     'https://ddragon.leagueoflegends.com/cdn/12.14.1/img/champion/',
