@@ -1,6 +1,8 @@
+import { TournamentService } from './services/tournament.service';
 import { ScheduleGamesService } from './../../shared/layout/schedule-games/services/schedule-games.service';
 import { Component, OnInit } from '@angular/core';
 import { Schedule, Event } from 'src/app/core/model/schedule.model';
+import { League, Tournament, TournamentElement } from './models/tournament.model';
 
 @Component({
   selector: 'app-home',
@@ -26,29 +28,42 @@ export class HomeComponent implements OnInit {
   nextValScheduleMatches: Event[] = [];
   pastValScheduleMatches: Event[] = [];
 
-  constructor(private scheduleGamesService: ScheduleGamesService) {}
+  slugsTournament: TournamentElement[] = []
+  teste : any[] = []
+
+  constructor(private scheduleGamesService: ScheduleGamesService, private tournamentService: TournamentService) {}
 
   ngOnInit() {
     this.getValorantVodGames();
     this.getValorantLiveGames();
     this.getLoLScheduleGames();
+    this.getLoLCompleteGames();
+    this.getTournamentsForLeague()
   }
 
-  getLoLScheduleGames() {
+  getLoLScheduleGames(pageToken?: string | null) {
     this.scheduleGamesService
-      .getLoLScheduleGames()
+      .getLoLScheduleGames(pageToken ? pageToken : null)
       .subscribe((res: Schedule) => {
         this.loading = true;
-        this.scheduleMatches = res.data.schedule.events.reverse();
+        this.scheduleMatches = res.data.schedule.events
 
         this.nextScheduleMatches = this.scheduleMatches.filter((obj: Event) => {
           return obj.state === 'unstarted';
         });
-        this.pastScheduleMatches = this.scheduleMatches.filter((obj: Event) => {
-          return obj.state === 'completed';
-        });
         this.loading = false;
       });
+  }
+
+  getLoLCompleteGames(tournamentId?: string | null){
+    this.scheduleGamesService
+    .getLoLCompleteGames(tournamentId ? tournamentId : null)
+    .subscribe((res: Schedule) => {
+      this.loading = true;
+      this.pastScheduleMatches = res.data.schedule.events.reverse()
+
+      this.loading = false;
+    });
   }
 
   getValorantVodGames() {
@@ -60,20 +75,30 @@ export class HomeComponent implements OnInit {
   }
 
   getValorantLiveGames() {
-    // this.scheduleGamesService
-    //   .getValorantLiveGames()
-    //   .subscribe((res: Schedule) => {
-    //     this.valScheduleMatches = res.data.schedule.events.reverse();
-    //     this.nextValScheduleMatches = this.valScheduleMatches.filter(
-    //       (obj: Event) => {
-    //         return obj.state === 'unstarted';
-    //       }
-    //     );
-    //     this.pastValScheduleMatches = this.valScheduleMatches.filter(
-    //       (obj: Event) => {
-    //         return obj.state === 'completed';
-    //       }
-    //     );
-    //   });
+    // TODO: Pesquisar Endpoint
   }
+
+  getTournamentsForLeague(){
+    this.tournamentService.getTournaments().subscribe(
+      (res: any) => {
+        res.data.leagues.forEach((leagues: League)  => {
+          leagues.tournaments.forEach((tournament: TournamentElement) => {
+            this.slugsTournament.push(tournament)
+          });
+        });
+      },
+      )
+  }
+
+  setFilterLeagues(reference: any[]): any[] {
+    console.log(reference)
+    const leaguesFilter: any[] = []
+    reference.forEach(obj => {
+      if(!leaguesFilter.find(element => {return obj.league.name == element.name})){
+        leaguesFilter.push(obj.league)
+      }
+    })
+
+    return leaguesFilter
+}
 }

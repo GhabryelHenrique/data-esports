@@ -11,6 +11,7 @@ export class CardMatchComponent {
   @Input() game?: string;
   @Input() isHistory: boolean = false;
 
+  pageOfItems: any[] =[]
   page = 1;
 
   constructor(private router: Router) {}
@@ -30,4 +31,9 @@ export class CardMatchComponent {
       this.router.navigateByUrl(`${this.game}/matches/history/${evt.match.id}`);
     }
   }
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
 }

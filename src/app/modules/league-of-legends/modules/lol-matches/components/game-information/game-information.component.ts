@@ -1,3 +1,4 @@
+import { Frame, GameDetails } from './../../../models/lol-game-detais.model';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -10,5 +11,6 @@ export class GameInformationComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

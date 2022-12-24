@@ -1,3 +1,5 @@
+import { Frame } from './../../../models/lol-game-detais.model';
+import { Locale } from './../../../../../../core/model/locale.enum';
 import { YoutubeService } from './../../../../../../core/services/youtube/youtube.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,8 +7,9 @@ import { MatchesService } from 'src/app/modules/league-of-legends/services/match
 import { TwitchService } from '../../../../../../core/services/twitch/twitch.service';
 import { LiveMatchStatsService } from '../../../../services/live-match-stats/live-match-stats.service';
 import { GameDetails } from '../../../models/lol-game-detais.model';
-import { LolDataGameDetails } from '../../../models/lol-matches.model';
+import { LolDataGameDetails, LolVOD } from '../../../models/lol-matches.model';
 import { LolGame, LolMatch } from './../../../models/lol-matches.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-lol-matches-live',
@@ -21,12 +24,18 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
   gameId: number | string = '';
   urlVod?: string;
   gameInfo?: GameDetails;
+  parameter: string = ''
   matchStream: any[] = [];
   gameFrame: any;
+  selectedOption = 'en-US'
   goRepeat = true;
-  totalGames?: LolGame[];
+  totalGames: LolGame[] = [];
   isHistory: boolean = false;
-  gameNumber?: number;
+  gameNumber: number = 0;
+  currentLocale?: string;
+  locale: any[] = [];
+  form: FormGroup = new FormGroup({});
+  localeArr: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -34,8 +43,24 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
     private matchesService: MatchesService,
     private liveMatchStatsService: LiveMatchStatsService,
     private twitchService: TwitchService,
-    private youtubeService: YoutubeService
-  ) {}
+    private youtubeService: YoutubeService,
+    private fb: FormBuilder
+  ) {
+    this.form = fb.group({
+      website: [this.selectedOption, [Validators.required]],
+    })
+  }
+  get f(){
+    return this.form.controls;
+  }
+
+  setVod(event: any){
+   let parameterFind: any = this.totalGames[this.gameNumber - 1].vods.find((obj) => {
+      return obj.locale === event
+    })
+
+    this.parameter = this.getUrlVod(parameterFind.parameter)
+  }
 
   ngOnDestroy(): void {
     this.goRepeat = false;
@@ -74,6 +99,7 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
         this.totalGames = res.data.event.match.games.filter((obj: any) => {
           return obj.state != 'unneeded';
         });
+
         const inProgressGame = this.totalGames.filter((element: any) => {
           return element.state === 'inProgress';
         });
@@ -84,8 +110,10 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
           var last = this.totalGames[this.totalGames.length - 1];
           this.gameNumber = last.number;
           this.getHistory(last.id);
+          this.setVod(this.totalGames[this.gameNumber - 1].vods[0].locale)
         }
       });
+      this.form.setValue({website: this.totalGames[this.gameNumber - 1].vods[0].locale})
   }
 
   getHistory(id: any) {
@@ -94,9 +122,47 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
     this.matchesService
       .getMatchesDetails(id, { startingTime: date })
       .subscribe((res: GameDetails) => {
-        this.gameInfo = res;
+        this.gameInfo = res
         this.goRepeat = false;
       });
+  }
+
+  setImagesCountry(locale: string) {
+    switch (locale) {
+      case 'en-US':
+        return Locale.en_US;
+      case 'es-ES':
+        return Locale.es_ES;
+      case 'es-MX':
+        return Locale.es_MX;
+      case 'it-IT':
+        return Locale.it_IT;
+      case 'pt-BR':
+        return Locale.pt_BR;
+      case 'tr-TR':
+        return Locale.tr_TR;
+    default:
+      return Locale.en_US;
+    }
+  }
+
+  setNameCountry(locale: string) {
+    switch (locale) {
+      case 'en-US':
+        return Locale.en_US_Name;
+      case 'es-ES':
+        return Locale.es_ES_Name;
+      case 'es-MX':
+        return Locale.es_MX_Name;
+      case 'it-IT':
+        return Locale.it_IT_Name;
+      case 'pt-BR':
+        return Locale.pt_BR_Name;
+      case 'tr-TR':
+        return Locale.tr_TR_Name;
+    default:
+      return Locale.en_US_Name;
+    }
   }
 
   twitchStream(id: any) {
@@ -124,7 +190,7 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
     this.liveMatchStatsService
       .getLiveDetailsGame(this.gameId, { hl: 'pt-BR', startingTime: date })
       .subscribe((res: any) => {
-        this.gameFrame = res.frames[0].participants;
+        this.gameFrame = res
       });
   }
 

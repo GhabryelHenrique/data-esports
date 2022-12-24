@@ -97,6 +97,6 @@ export enum EventType {
 }
 
 export interface Pages {
-  older: string;
-  newer: null;
+  older: string | null;
+  newer: string | null;
 }

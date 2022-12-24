@@ -1,3 +1,4 @@
+import { MatSelectModule } from '@angular/material/select';
 import { ScheduleGamesModule } from './../../shared/layout/schedule-games/schedule-games.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,6 +13,7 @@ const routes: Routes = [{ path: '', component: HomeComponent }];
     CommonModule,
     LiveModule,
     ScheduleGamesModule,
+    MatSelectModule,
     RouterModule.forChild(routes),
   ],
   declarations: [HomeComponent],

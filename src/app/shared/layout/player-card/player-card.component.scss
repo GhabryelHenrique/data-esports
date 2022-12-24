@@ -3,7 +3,11 @@
   background-color: var(--card-color);
   border-radius: 5px;
   padding: 1rem;
-  margin: 0px 15px 1.5rem 15px;
+  margin: 0px 0px 1.5rem 15px;
+}
+
+.playerStatus{
+  margin: 1rem 0;
 }
 
 img {
@@ -19,6 +23,7 @@ img {
 }
 .statusRed {
   margin-right: 2rem;
+  margin-left: 0;
 }
 
 .container {

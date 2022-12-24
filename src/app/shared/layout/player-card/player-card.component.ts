@@ -1,6 +1,6 @@
 import { environment } from './../../../../environments/environment';
 import { Component, Input, OnInit } from '@angular/core';
-import { LiveMatchStatsService } from 'src/app/modules/league-of-legends/services/live-match-stats/live-match-stats.service';
+import { Frame } from 'src/app/modules/league-of-legends/modules/models/lol-game-detais.model';
 
 @Component({
   selector: 'app-player-card',
@@ -12,7 +12,7 @@ export class PlayerCardComponent {
   matchDetails?: any;
   gameId?: number;
   @Input() gameInfo: any;
-  @Input() gameFrame: any;
+  @Input() gameFrame!: Frame;
 
   baseUrl = environment.CHAMPIONS_URL;
 

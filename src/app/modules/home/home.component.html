@@ -4,17 +4,45 @@
 
 <h3>League of Legends</h3>
 <div class="nextGames" *ngIf="nextScheduleMatches.length > 0">
-  <h2>Proximos Jogos</h2>
-  <hr />
-  <app-schedule-games
-    game="League of Legends"
-    [dataSource]="nextScheduleMatches"
-    [loading]="loading"
-  ></app-schedule-games>
+  <div class="headerTitle">
+    <h2>Proximos Jogos</h2>
+    <mat-form-field appearance="fill">
+      <mat-select placeholder="Filtrar por liga">
+        <mat-option
+          *ngFor="
+            let tournamentsFilter of setFilterLeagues(nextScheduleMatches);
+            let i = index
+          "
+        >
+          <p>{{ tournamentsFilter.name }}</p>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+    <hr />
+    <app-schedule-games
+      game="League of Legends"
+      [dataSource]="nextScheduleMatches"
+      [loading]="loading"
+    ></app-schedule-games>
 </div>
 
 <div class="nextGames">
-  <h2>Jogos Anteriores</h2>
+  <div class="headerTitle">
+    <h2>Jogos Anteriores</h2>
+    <mat-form-field appearance="fill">
+      <mat-select placeholder="Filtrar por liga">
+        <mat-option
+        *ngFor="
+        let tournamentsFilter of setFilterLeagues(pastScheduleMatches);
+        let i = index
+        "
+        >
+        <p>{{ tournamentsFilter.name }}</p>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
   <hr />
   <app-schedule-games
     game="League of Legends"
@@ -26,9 +54,11 @@
 
 <h3>Valorant</h3>
 <div class="nextGames" *ngIf="nextValScheduleMatches.length > 0">
-  <h2>Proximos Jogos</h2>
-  <hr />
-  <app-schedule-games
+  <div class="headerTitle">
+    <h2>Proximos Jogos</h2>
+  </div>
+    <hr />
+    <app-schedule-games
     game="Valorant"
     [dataSource]="nextValScheduleMatches"
     [loading]="loading"

@@ -58,3 +58,41 @@ h2 {
 hr {
   margin: 0 3rem;
 }
+
+::ng-deep {
+  .mdc-list-item__primary-text {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+}
+
+::ng-deep {
+  .mdc-text-field--filled {
+    background-color: var(--card-color) !important;
+    color: white !important;
+  }
+}
+
+::ng-deep {
+  .mat-mdc-select-value, .mat-mdc-select-arrow, .mat-mdc-select-placeholder  {
+    color: var(--text) !important;
+  }
+}
+
+::ng-deep {
+  .mdc-menu-surface--open  {
+    background: var(--card-color) !important;
+  }
+}
+
+.headerTitle{
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  width: 10%;
+    align-self: self-end;
+    margin-right: 50px;
+}

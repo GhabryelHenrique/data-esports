@@ -13,8 +13,12 @@ export class ScheduleGamesService {
 
   constructor(private http: HttpClient) {}
 
-  getLoLScheduleGames(): Observable<Schedule> {
-    return this.http.get<Schedule>(`${this.lolBaseUrl}/getSchedule?hl=pt-BR`);
+  getLoLScheduleGames(pageToken?: string | null): Observable<Schedule> {
+    return this.http.get<Schedule>(this.lolBaseUrl + '/getSchedule?hl=pt-BR' + (pageToken ? `&pageToken=${pageToken}` : ''));
+  }
+
+  getLoLCompleteGames(tournamentId?: string | null): Observable<Schedule> {
+    return this.http.get<Schedule>(this.lolBaseUrl + '/getCompletedEvents?hl=pt-BR' + (tournamentId ? `&tournamentId=${tournamentId}` : ''));
   }
 
   getValorantLiveGames(): Observable<Schedule> {

@@ -9,7 +9,7 @@
   <div *ngIf="gameInfo" class="d-flex justify-content-center">
     <app-game-information
       style="width: 100%"
-      [gameInfo]="gameInfo"
+      [gameInfo]="gameInfo.frames.reverse()[0]"
     ></app-game-information>
   </div>
   <app-player-card
@@ -24,15 +24,29 @@
       width="1280"
     >
     </iframe> -->
-    <div class="ytVod" *ngFor="let gameVod of totalGames"  [ngClass]="{ 'esconder': gameVod.number != gameNumber }">
+    <div class="ytVod" *ngFor="let gameVod of totalGames" [ngClass]="{ 'esconder': gameVod.number != gameNumber || gameVod.state === 'inProgress' }">
+      <div class="languageBar">
       <iframe
         height="550"
         title=""
         width="955"
-        [src]="getUrlVod(gameVod.vods[0].parameter) | safe"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        [src]="parameter | safe"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
+      <div class="footerPlayer">
+        <form [formGroup]="form">
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="website" (valueChange)="setVod($event)">
+              <mat-option *ngFor="let locale of gameVod.vods; let i = index" [value]="locale.locale">
+                <img with="30" alt="flag" height="30" [src]="setImagesCountry(locale.locale)">
+                <p>{{ setNameCountry(locale.locale) }}</p>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+      </div>
+      </div>
     </div>
   </app-player-card>
 </div>
