@@ -7,6 +7,7 @@ export const environment = {
   LOLESPORTSAPI: {
     ESPORTS_API: 'https://esports-api.lolesports.com/persisted/gw',
     FEEDLOLAPI: 'https://feed.lolesports.com/livestats/v1',
+    API_LOLESPORTS: 'https://api.lolesports.com/api/v1',
     TOKEN_ACCESS: '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z',
   },
   VALORANTESPORTSAPI: {
