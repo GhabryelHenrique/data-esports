@@ -30,6 +30,9 @@ export class HomeComponent implements OnInit {
 
   slugsTournament: TournamentElement[] = []
   teste : any[] = []
+  dataSource: Event[] =[];
+  pastDataSource: Event[] =[];
+  pastValDataSource: Event[] = [];
 
   constructor(private scheduleGamesService: ScheduleGamesService, private tournamentService: TournamentService) {}
 
@@ -48,9 +51,11 @@ export class HomeComponent implements OnInit {
         this.loading = true;
         this.scheduleMatches = res.data.schedule.events
 
-        this.nextScheduleMatches = this.scheduleMatches.filter((obj: Event) => {
+
+        this.nextScheduleMatches  = this.scheduleMatches.filter((obj: Event) => {
           return obj.state === 'unstarted';
         });
+        this.dataSource = this.nextScheduleMatches
         this.loading = false;
       });
   }
@@ -60,8 +65,8 @@ export class HomeComponent implements OnInit {
     .getLoLCompleteGames(tournamentId ? tournamentId : null)
     .subscribe((res: Schedule) => {
       this.loading = true;
-      this.pastScheduleMatches = res.data.schedule.events.reverse()
-
+      this.pastScheduleMatches  = res.data.schedule.events.reverse()
+      this.pastDataSource = this.pastScheduleMatches
       this.loading = false;
     });
   }
@@ -71,6 +76,7 @@ export class HomeComponent implements OnInit {
       .getValorantVodGames()
       .subscribe((res: Schedule) => {
         this.pastValScheduleMatches = res.data.schedule.events.reverse();
+        this.pastValDataSource = this.pastValScheduleMatches
       });
   }
 
@@ -91,7 +97,6 @@ export class HomeComponent implements OnInit {
   }
 
   setFilterLeagues(reference: any[]): any[] {
-    console.log(reference)
     const leaguesFilter: any[] = []
     reference.forEach(obj => {
       if(!leaguesFilter.find(element => {return obj.league.name == element.name})){
@@ -100,5 +105,25 @@ export class HomeComponent implements OnInit {
     })
 
     return leaguesFilter
+}
+
+applyFilter(event: string, reference: string){
+  switch (reference){
+    case 'nextScheduleMatches':
+      this.dataSource = this.nextScheduleMatches.filter((obj) => {
+        return obj.league.name === event
+      })
+      break
+    case 'pastScheduleMatches':
+      this.pastDataSource = this.pastScheduleMatches.filter((obj) => {
+        return obj.league.name === event
+      })
+      break
+    case 'pastValScheduleMatches':
+      this.pastValDataSource = this.pastValScheduleMatches.filter((obj) => {
+        return obj.league.name === event
+      })
+      break
+    }
 }
 }

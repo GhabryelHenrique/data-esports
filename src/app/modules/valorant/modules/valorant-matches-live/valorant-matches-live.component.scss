@@ -77,3 +77,78 @@
   line-height: 28px;
   font-size: 18px;
 }
+
+img {
+  width: 100%;
+  opacity: 0.5;
+}
+
+h2 {
+  top: 15%;
+  left: 20%;
+  font-size: 10rem;
+}
+
+h4{
+  top: 70%;
+  left: 20%;
+  font-size: 6rem;
+}
+
+h2,h4 {
+  text-transform: uppercase;
+  position: absolute;
+  line-height: 0.97;
+  color: #ece8e1;
+  z-index: 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  font-weight: 400;
+  display: block;
+  overflow: hidden;
+  text-transform: uppercase;
+  font-family: "Tungsten-Bold", sans-serif;
+  line-height: 0.97;
+}
+
+
+.comingSoon {
+  background: #000000;
+}
+
+a {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  display: inline-block;
+  min-width: 28.8rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: .7rem;
+  text-align: center;
+  color: #ece8e1;
+  position: relative;
+  margin-top: 0;
+  transform: none;
+  left: auto;
+  font-family: 'DINNextW05-Bold',arial,georgia,sans-serif;
+}
+
+.primaryButton{
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  cursor: pointer;
+  text-align: center;
+  color: #ece8e1;
+  font-family: 'DINNextW05-Bold',arial,georgia,sans-serif;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}

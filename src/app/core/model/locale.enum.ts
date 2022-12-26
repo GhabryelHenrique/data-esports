@@ -5,6 +5,7 @@ export enum Locale {
   it_IT = '../../../../../../../../../assets/flags/italia.png',
   pt_BR = '../../../../../../../../../assets/flags/brasil.png',
   tr_TR = '../../../../../../../../../assets/flags/turquia.png',
+  nl_NL = '../../../../../../../../../assets/flags/paises-baixos.png',
 
   en_US_Name = 'English',
   es_ES_Name = 'Español (España)',
@@ -12,4 +13,5 @@ export enum Locale {
   it_IT_Name = 'Italiano',
   pt_BR_Name = 'Português',
   tr_TR_Name = 'Türkçe',
+  nl_NL_Name = 'Nederlands',
 }

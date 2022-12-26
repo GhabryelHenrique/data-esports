@@ -17,6 +17,7 @@ export class CardMatchComponent {
   constructor(private router: Router) {}
 
   click(evt: any) {
+    if(evt.state === 'unstarted') return
     if (this.game === 'League of Legends') {
       this.game = 'lol';
     }

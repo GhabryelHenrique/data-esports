@@ -49,6 +49,8 @@ export class AuthorizationTokenInterceptor implements HttpInterceptor {
           environment.VALORANTESPORTSAPI.TOKEN_ACCESS
         ),
       });
+    } else {
+      this.dupReq = req
     }
     return next.handle(this.dupReq);
   }

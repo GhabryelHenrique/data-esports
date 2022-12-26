@@ -6,6 +6,7 @@
         let player of gameInfo.frames[0].blueTeam.participants;
         let i = index
       "
+      (click)="clickEventHandler(gameInfo.gameMetadata.blueTeamMetadata.participantMetadata[i])"
     >
       <div class="player">
         <p class="playerName">

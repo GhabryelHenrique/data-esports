@@ -7,7 +7,7 @@ import { MatchesService } from 'src/app/modules/league-of-legends/services/match
 import { TwitchService } from '../../../../../../core/services/twitch/twitch.service';
 import { LiveMatchStatsService } from '../../../../services/live-match-stats/live-match-stats.service';
 import { GameDetails } from '../../../models/lol-game-detais.model';
-import { LolDataGameDetails, LolVOD } from '../../../models/lol-matches.model';
+import { LolDataGameDetails, LolEvent, LolVOD } from '../../../models/lol-matches.model';
 import { LolGame, LolMatch } from './../../../models/lol-matches.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -36,6 +36,7 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
   locale: any[] = [];
   form: FormGroup = new FormGroup({});
   localeArr: any[] = [];
+  matchTournament?: LolEvent;
 
   constructor(
     private route: ActivatedRoute,
@@ -94,6 +95,7 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
     this.liveMatchStatsService
       .getGameDetails({ hl: 'pt-BR', id: this.matchID })
       .subscribe((res: LolDataGameDetails) => {
+        this.matchTournament = res.data.event
         this.matchDetails = res.data.event.match;
         this.matchStream = res.data.event.streams;
         this.totalGames = res.data.event.match.games.filter((obj: any) => {
@@ -141,6 +143,8 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
         return Locale.pt_BR;
       case 'tr-TR':
         return Locale.tr_TR;
+      case 'nl-NL':
+        return Locale.nl_NL;
     default:
       return Locale.en_US;
     }
@@ -160,6 +164,8 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
         return Locale.pt_BR_Name;
       case 'tr-TR':
         return Locale.tr_TR_Name;
+      case 'nl-NL':
+        return Locale.nl_NL_Name;
     default:
       return Locale.en_US_Name;
     }

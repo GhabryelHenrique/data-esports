@@ -7,12 +7,13 @@
   <div class="headerTitle">
     <h2>Proximos Jogos</h2>
     <mat-form-field appearance="fill">
-      <mat-select placeholder="Filtrar por liga">
+      <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'nextScheduleMatches')">
         <mat-option
           *ngFor="
             let tournamentsFilter of setFilterLeagues(nextScheduleMatches);
             let i = index
           "
+          [value]="tournamentsFilter.name"
         >
           <p>{{ tournamentsFilter.name }}</p>
         </mat-option>
@@ -22,7 +23,7 @@
     <hr />
     <app-schedule-games
       game="League of Legends"
-      [dataSource]="nextScheduleMatches"
+      [dataSource]="dataSource"
       [loading]="loading"
     ></app-schedule-games>
 </div>
@@ -31,14 +32,15 @@
   <div class="headerTitle">
     <h2>Jogos Anteriores</h2>
     <mat-form-field appearance="fill">
-      <mat-select placeholder="Filtrar por liga">
+      <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'pastScheduleMatches')">
         <mat-option
         *ngFor="
-        let tournamentsFilter of setFilterLeagues(pastScheduleMatches);
+        let tournamentsPastFilter of setFilterLeagues(pastScheduleMatches);
         let i = index
         "
+        [value]="tournamentsPastFilter.name"
         >
-        <p>{{ tournamentsFilter.name }}</p>
+        <p>{{ tournamentsPastFilter.name }}</p>
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -47,7 +49,7 @@
   <app-schedule-games
     game="League of Legends"
     [isHistory]="true"
-    [dataSource]="pastScheduleMatches"
+    [dataSource]="pastDataSource"
     [loading]="loading"
   ></app-schedule-games>
 </div>
@@ -66,12 +68,27 @@
 </div>
 
 <div class="nextGames">
-  <h2>Jogos Anteriores</h2>
+  <div class="headerTitle">
+    <h2>Jogos Anteriores</h2>
+    <mat-form-field appearance="fill">
+    <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'pastValScheduleMatches')">
+      <mat-option
+        *ngFor="
+          let tournamentsFilter of setFilterLeagues(pastValScheduleMatches);
+          let i = index
+        "
+        [value]="tournamentsFilter.name"
+        >
+        <p>{{ tournamentsFilter.name }}</p>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
   <hr />
   <app-schedule-games
     game="Valorant"
     [isHistory]="true"
-    [dataSource]="pastValScheduleMatches"
+    [dataSource]="pastValDataSource"
     [loading]="loading"
   ></app-schedule-games>
 </div>
