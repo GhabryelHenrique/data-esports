@@ -2,23 +2,31 @@
   <live game="League of Legends"></live>
 </div>
 
-<h3>League of Legends</h3>
+<div class="d-flex" style="justify-content: center;">
+  <img src="../../../assets/lol-league-of-Legends-logo-4.png" width="10%" alt="League of Legends">
+</div>
+
 <div class="nextGames" *ngIf="nextScheduleMatches.length > 0">
   <div class="headerTitle">
     <h2>Proximos Jogos</h2>
-    <mat-form-field appearance="fill">
-      <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'nextScheduleMatches')">
-        <mat-option
+    <div class="searchFilter">
+      <form class="search">
+        <input type="text" #input (keyup)="search(input.value, 'nextScheduleMatches')" placeholder="Pesquisar...">
+      </form>
+      <mat-form-field appearance="fill">
+        <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'nextScheduleMatches')">
+          <mat-option
           *ngFor="
-            let tournamentsFilter of setFilterLeagues(nextScheduleMatches);
-            let i = index
+          let tournamentsFilter of setFilterLeagues(nextScheduleMatches);
+          let i = index
           "
           [value]="tournamentsFilter.name"
-        >
+          >
           <p>{{ tournamentsFilter.name }}</p>
         </mat-option>
       </mat-select>
     </mat-form-field>
+  </div>
   </div>
     <hr />
     <app-schedule-games
@@ -28,22 +36,28 @@
     ></app-schedule-games>
 </div>
 
-<div class="nextGames">
+<div class="nextGames" *ngIf="pastScheduleMatches.length > 0">
   <div class="headerTitle">
     <h2>Jogos Anteriores</h2>
-    <mat-form-field appearance="fill">
-      <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'pastScheduleMatches')">
-        <mat-option
-        *ngFor="
-        let tournamentsPastFilter of setFilterLeagues(pastScheduleMatches);
-        let i = index
-        "
-        [value]="tournamentsPastFilter.name"
-        >
-        <p>{{ tournamentsPastFilter.name }}</p>
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <div class="searchFilter">
+
+      <form class="search">
+        <input type="text" #input (keyup)="search(input.value, 'pastScheduleMatches')" placeholder="Pesquisar...">
+      </form>
+      <mat-form-field appearance="fill">
+        <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'pastScheduleMatches')">
+          <mat-option
+          *ngFor="
+          let tournamentsPastFilter of setFilterLeagues(pastScheduleMatches);
+          let i = index
+          "
+          [value]="tournamentsPastFilter.name"
+          >
+          <p>{{ tournamentsPastFilter.name }}</p>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </div>
   <hr />
   <app-schedule-games
@@ -54,7 +68,10 @@
   ></app-schedule-games>
 </div>
 
-<h3>Valorant</h3>
+<div class="d-flex" style="justify-content: center;">
+  <img src="../../../assets/valorant-logo-freelogovectors.net_-400x73.png" width="15%" alt="League of Legends">
+</div>
+
 <div class="nextGames" *ngIf="nextValScheduleMatches.length > 0">
   <div class="headerTitle">
     <h2>Proximos Jogos</h2>
@@ -67,15 +84,20 @@
   ></app-schedule-games>
 </div>
 
-<div class="nextGames">
+<div class="nextGames" *ngIf="pastValScheduleMatches.length > 0">
   <div class="headerTitle">
     <h2>Jogos Anteriores</h2>
-    <mat-form-field appearance="fill">
-    <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'pastValScheduleMatches')">
+    <div class="searchFilter">
+
+      <form class="search">
+        <input type="text" #input (keyup)="search(input.value,'pastValScheduleMatches')" placeholder="Pesquisar...">
+      </form>
+      <mat-form-field appearance="fill">
+        <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'pastValScheduleMatches')">
       <mat-option
         *ngFor="
-          let tournamentsFilter of setFilterLeagues(pastValScheduleMatches);
-          let i = index
+        let tournamentsFilter of setFilterLeagues(pastValScheduleMatches);
+        let i = index
         "
         [value]="tournamentsFilter.name"
         >
@@ -83,6 +105,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+</div>
 </div>
   <hr />
   <app-schedule-games

@@ -126,4 +126,24 @@ applyFilter(event: string, reference: string){
       break
     }
 }
+
+search(search: string, reference: string){
+  switch (reference){
+    case 'nextScheduleMatches':
+      this.dataSource = this.nextScheduleMatches.filter((obj) => {
+        return obj.league.name.toLowerCase().includes(search.toLowerCase())
+      })
+      break
+    case 'pastScheduleMatches':
+      this.pastDataSource = this.pastScheduleMatches.filter((obj) => {
+        return obj.league.name.includes(search)
+      })
+      break
+    case 'pastValScheduleMatches':
+      this.pastValDataSource = this.pastValScheduleMatches.filter((obj) => {
+        return obj.league.name.includes(search)
+      })
+      break
+    }
+  }
 }

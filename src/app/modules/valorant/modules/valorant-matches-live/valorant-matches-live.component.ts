@@ -23,7 +23,6 @@ export class ValorantMatchesLiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => (this.matchID = params['id']));
-    console.log(localStorage.getItem('matchDetails'));
   }
 
   ngOnDestroy() {

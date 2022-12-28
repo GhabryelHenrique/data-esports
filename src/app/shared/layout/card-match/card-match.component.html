@@ -3,7 +3,6 @@
     <a
       *ngFor="
         let item of pageOfItems
-        let i = index
       "
       (click)="click(item)"
     >
@@ -41,5 +40,5 @@
 </div>
 
 <div class="pagination">
-  <jw-pagination [items]="cardContent" [pageSize]="12" [maxPages]="100" (changePage)="onChangePage($event)"></jw-pagination>
+  <jw-pagination [items]="cardContent" [pageSize]="9" [maxPages]="10" (changePage)="onChangePage($event)"></jw-pagination>
 </div>

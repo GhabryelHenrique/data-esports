@@ -96,7 +96,6 @@ h4{
 }
 
 h2,h4 {
-  text-transform: uppercase;
   position: absolute;
   line-height: 0.97;
   color: #ece8e1;
@@ -109,13 +108,10 @@ h2,h4 {
   overflow: hidden;
   text-transform: uppercase;
   font-family: "Tungsten-Bold", sans-serif;
-  line-height: 0.97;
 }
 
 
-.comingSoon {
-  background: #000000;
-}
+
 
 a {
   text-rendering: optimizeLegibility;

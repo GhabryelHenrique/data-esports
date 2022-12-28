@@ -7,6 +7,29 @@
   }
 }
 
+::ng-deep {
+  .mdc-list-item__primary-text {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .mdc-text-field--filled {
+    background-color: var(--card-color) !important;
+    color: white !important;
+  }
+  .mat-mdc-select-value, .mat-mdc-select-arrow, .mat-mdc-select-placeholder  {
+    color: var(--text) !important;
+  }
+  .mdc-menu-surface--open  {
+    background: var(--card-color) !important;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper{
+    display: none;
+  }
+}
+
+
 .liveText {
   color: white;
   z-index: 1;
@@ -49,50 +72,53 @@
 }
 
 h2 {
-  margin: 1rem 3rem;
+  margin: 1rem;
   font-size: 28px;
-  font-style: italic;
   font-weight: 800;
 }
 
 hr {
-  margin: 0 3rem;
+  margin: 0 20rem;
 }
 
-::ng-deep {
-  .mdc-list-item__primary-text {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-}
 
-::ng-deep {
-  .mdc-text-field--filled {
-    background-color: var(--card-color) !important;
-    color: white !important;
-  }
-}
-
-::ng-deep {
-  .mat-mdc-select-value, .mat-mdc-select-arrow, .mat-mdc-select-placeholder  {
-    color: var(--text) !important;
-  }
-}
-
-::ng-deep {
-  .mdc-menu-surface--open  {
-    background: var(--card-color) !important;
-  }
-}
 
 .headerTitle{
   display: flex;
   flex-direction: column;
+  margin: 0 20rem;
+
 }
 
 mat-form-field {
-  width: 10%;
-    align-self: self-end;
-    margin-right: 50px;
+  width: 15%;
+}
+
+.searchFilter{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-color);
+  padding: 15px 20px;
+  border-radius: 5px;
+  width: 83%;
+  height: 3.5rem;
+}
+
+input {
+  width: 100%;
+  background: none;
+  font-size: 18px;
+  border: none;
+  color: var(--text)
+}
+
+input::placeholder {
+  color: var(--text)
 }

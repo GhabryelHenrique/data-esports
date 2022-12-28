@@ -70,10 +70,12 @@
   display: flex;
   overflow: auto;
   overflow-y: hidden;
+  justify-content: center;
+  padding: 1% 0;
 }
 
 .games-list-items {
-  width: 100%;
+  width: 80%;
   display: grid;
   grid-template-columns: repeat(auto-fill, 25rem);
   grid-gap: 2rem;
