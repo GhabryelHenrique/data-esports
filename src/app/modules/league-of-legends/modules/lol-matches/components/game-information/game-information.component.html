@@ -1,4 +1,5 @@
 <div class="gameStatus d-flex justify-content-between container p-5">
+  <div class="blueTeam">
   <ul class="d-flex justify-content-start w-30 blueInfo">
     <li class="d-flex flex-column align-items-center">
       <div class="blueIcon inibIcon"></div>
@@ -26,6 +27,12 @@
     </li>
   </ul>
 
+  <div class="dragons">
+    <img *ngFor="let dragon of gameInfo.blueTeam.dragons" [src]="verifyDragon(dragon)" alt="{{dragon}}">
+  </div>
+
+  </div>
+<div class="redTeam">
   <ul class="d-flex justify-content-start w-30 redInfo">
     <li class="d-flex flex-column align-items-center">
       <div class="redIcon inibIcon"></div>
@@ -52,4 +59,9 @@
       <p>{{ gameInfo.redTeam.totalKills }}</p>
     </li>
   </ul>
+
+  <div class="dragons">
+    <img *ngFor="let dragon of gameInfo.redTeam.dragons" [src]="verifyDragon(dragon)" alt="{{dragon}}">
+  </div>
+</div>
 </div>

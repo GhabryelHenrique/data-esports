@@ -30,6 +30,7 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
   selectedOption = 'en-US'
   goRepeat = true;
   totalGames: LolGame[] = [];
+  val: any
   isHistory: boolean = false;
   gameNumber: number = 0;
   currentLocale?: string;

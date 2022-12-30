@@ -17,7 +17,7 @@
 }
 
 .p-5 {
-  padding: 1.5rem 3rem !important;
+  padding: 1.5rem 2rem !important;
   margin-bottom: 3rem;
   border-radius: 10px;
 }
@@ -31,4 +31,14 @@
   background-color: #e83f5b;
   width: 24px;
   height: 24px;
+}
+
+.dragons{
+  padding-top: 1rem;
+}
+
+.redTeam {
+  display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }

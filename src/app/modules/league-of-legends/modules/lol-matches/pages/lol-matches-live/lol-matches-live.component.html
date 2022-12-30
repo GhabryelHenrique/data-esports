@@ -6,6 +6,10 @@
     (changeGameEvent)="gameChange($event)"
   ></app-game-selector>
   <app-game-header [matchDetails]="matchDetails"></app-game-header>
+  <!-- <div class="gameStatus container">
+    <h5>Input: {{val}}</h5>
+    <p-slider [(ngModel)]="val"></p-slider>
+  </div> -->
   <div *ngIf="gameInfo" class="d-flex justify-content-center">
     <app-game-information
       style="width: 100%"

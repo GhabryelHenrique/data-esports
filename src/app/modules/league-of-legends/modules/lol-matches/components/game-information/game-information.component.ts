@@ -1,5 +1,6 @@
 import { Frame, GameDetails } from './../../../models/lol-game-detais.model';
 import { Component, Input, OnInit } from '@angular/core';
+import { Dragons } from '../../../../../../core/model/dragons-file.model';
 
 @Component({
   selector: 'app-game-information',
@@ -12,5 +13,22 @@ export class GameInformationComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+  }
+
+  verifyDragon(dragon: string){
+    switch(dragon) {
+      case 'infernal':
+        return Dragons.infernal
+      case 'cloud':
+        return Dragons.cloud
+      case 'ocean':
+        return Dragons.ocean
+      case 'mountain':
+        return Dragons.mountain
+      case 'elder':
+        return Dragons.elder
+      default:
+        return
+    }
   }
 }

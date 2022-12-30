@@ -3,11 +3,21 @@
   padding: 2rem 0;
   justify-content: space-around;
 }
+
+.container {
+  background-color: var(--card-color);
+  max-width: 80%;
+  margin-bottom: 1%;
+  border-radius: 10px;
+  padding: 2rem 3rem 3rem;
+}
+
 .team-odds {
   max-width: 35%;
   font-weight: 700;
   color: var(--title);
 }
+
 .team-oods-left {
   -webkit-clip-path: polygon(
     0 0,
@@ -96,29 +106,20 @@ h4 {
   flex-direction: row-reverse;
 }
 
-::ng-deep {
+:host ::ng-deep {
   .mdc-list-item__primary-text {
     display: flex;
     gap: 10px;
     align-items: center;
   }
-}
-
-::ng-deep {
   .mdc-text-field--filled {
     margin: 15px 0 0 -15px !important;
     background-color: var(--background) !important;
     color: white !important;
   }
-}
-
-::ng-deep {
   .mat-mdc-select-value, .mat-mdc-select-arrow  {
     color: var(--text) !important;
   }
-}
-
-::ng-deep {
   .mdc-menu-surface--open  {
     background: var(--background) !important;
   }

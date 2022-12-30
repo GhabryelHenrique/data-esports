@@ -11,19 +11,22 @@ import { PlayerCardModule } from 'src/app/shared/layout/player-card/player-card.
 import { PipesModule } from 'src/app/core/pipes/pipes.module';
 import { AuthorizationTokenModule } from 'src/app/core/interceptors/authorization-token.interceptor';
 import {MatSelectModule} from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {SliderModule} from 'primeng/slider';
 @NgModule({
   imports: [
     CommonModule,
     LoLMatchesRoutingModule,
     NzTableModule,
+    SliderModule,
     PlayerCardModule,
     ReactiveFormsModule,
+    FormsModule,
     AuthorizationTokenModule,
     MatSelectModule,
     GameHeaderModule,
     PipesModule,
+    ReactiveFormsModule,
     GameInformationModule,
     GameSelectorModule,
   ],

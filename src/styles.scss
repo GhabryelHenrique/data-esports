@@ -27,3 +27,8 @@ body {
 ::-webkit-scrollbar {
   width: 0px;
 }
+
+.swal2-container.swal2-top-end>.swal2-popup {
+  background-color: var(--background);
+  color: var(--text);
+}

@@ -7,7 +7,7 @@
   }
 }
 
-::ng-deep {
+:host ::ng-deep {
   .mdc-list-item__primary-text {
     display: flex;
     gap: 10px;

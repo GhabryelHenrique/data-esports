@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'card-match',
   templateUrl: './card-match.component.html',
   styleUrls: ['./card-match.component.scss'],
+  providers: [MessageService]
 })
 export class CardMatchComponent {
   @Input() cardContent: any[] = [];
@@ -14,10 +16,13 @@ export class CardMatchComponent {
   pageOfItems: any[] =[]
   page = 1;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private messageService: MessageService) {}
 
   click(evt: any) {
-    if(evt.state === 'unstarted') return
+    if(evt.state === 'unstarted') {
+      this.messageService.add({severity:'error', summary:'Erro', detail:'Esse jogo ainda não possui dados. Aguarde seu Inicio!'});
+      return
+    }
     if (this.game === 'League of Legends') {
       this.game = 'lol';
     }
