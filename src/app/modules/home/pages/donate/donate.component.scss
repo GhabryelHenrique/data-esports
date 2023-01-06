@@ -1,0 +1,81 @@
+.container{
+  min-height: 85vh;
+
+}
+
+.content{
+  margin: 0 auto;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 10%
+}
+
+
+
+img{
+  width: 100%;
+  border-radius: 5%;
+}
+
+#payment-info{
+  background-color: var(--card-color);
+  padding: 20px;
+  border-radius: 10px;
+  height: 100%;
+}
+
+button{
+  margin-top: 1rem;
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  font-family: 'Gotham SSm A', 'Gotham SSm B', sans-serif;
+  box-sizing: border-box;
+  border-radius: .5rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: none;
+  outline: none;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  min-height: 56px;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  border-width: 1px;
+  border-style: solid;
+  width: 100%;
+}
+
+.live-game-card{
+  transition: none;
+}
+
+h1{
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  font-family: 'Gotham SSm A', 'Gotham SSm B', sans-serif;
+  margin: .67em 0;
+  box-sizing: border-box;
+  text-align: center;
+  font-weight: 800;
+  font-size: 2.25rem;
+  margin-bottom: 0;
+}
+
+.sogrinha{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  img{
+     width: 7%;
+  }
+}

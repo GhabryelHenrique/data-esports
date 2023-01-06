@@ -5,8 +5,12 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { LiveModule } from 'src/app/shared/live/live.module';
 import { RouterModule, Routes } from '@angular/router';
+import { DonateComponent } from './pages/donate/donate.component';
 
-const routes: Routes = [{ path: '', component: HomeComponent }];
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'donate', component: DonateComponent }
+];
 
 @NgModule({
   imports: [
@@ -16,6 +20,6 @@ const routes: Routes = [{ path: '', component: HomeComponent }];
     MatSelectModule,
     RouterModule.forChild(routes),
   ],
-  declarations: [HomeComponent],
+  declarations: [HomeComponent,DonateComponent],
 })
 export class HomeModule {}
