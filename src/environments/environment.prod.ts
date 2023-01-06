@@ -1,5 +1,6 @@
 export const environment = {
-  production: false,
+  production: true,
+  PIX_CODE: '00020126580014BR.GOV.BCB.PIX0136a1824ded-175f-4ee9-906b-ca4d8ab43b175204000053039865802BR5925Ghabryel Henrique Ferreir6009SAO PAULO61080540900062070503***6304D0A4',
   PANDASCORE: {
     BASE_URL: 'https://api.pandascore.co',
     TOKEN_ACCESS: 'Bearer rytahi7kZGVO9zpWHTT3cg7sBaifUKg_A8Pgb-pD0bpoMbcsTwc',

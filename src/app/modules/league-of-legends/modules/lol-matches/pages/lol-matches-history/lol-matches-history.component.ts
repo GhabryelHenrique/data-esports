@@ -1,4 +1,4 @@
-import { Event, Schedule } from './../../../../../../core/model/schedule.model';
+import { Schedule } from './../../../../../../core/model/schedule.model';
 import { ScheduleGamesService } from './../../../../../../shared/layout/schedule-games/services/schedule-games.service';
 import { Component, OnInit } from '@angular/core';
 

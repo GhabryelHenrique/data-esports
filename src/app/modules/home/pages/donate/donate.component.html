@@ -1,0 +1,40 @@
+<main class="container">
+  <div class="d-flex flex-row content">
+
+    <section class="fixed-l flex center pt6-l pt5 ph0-l ph3 measure-wide">
+      <div class="d-flex flex-column justify-content-center mr6-l mb1" style="height: 100%; text-align: center;">
+          <h1 class="npurple-1 f2-ns f3 tl-l tc lh-headline mb0-l mb3-m mb4 fw8">
+            Obrigado por utilizar nosso sistema!
+          </h1>
+          <h2 class="mt-5">
+            Te ajudamos de alguma forma?
+            Considere doar para que possamos criar algo maior no futuro!
+          </h2>
+          <div class="sogrinha mt-3">
+            <img src="../../../../../assets/sogrinha.png" alt="SOGRA DESCE">
+            <img src="../../../../../assets/sogrinha.png" alt="SOGRA DESCE">
+            <img src="../../../../../assets/sogrinha.png" alt="SOGRA DESCE">
+          </div>
+      </div>
+  </section>
+  <section id="payment-info">
+    <div
+    id="qr-data"
+    class="w-100 flex-ns flex-column pt4-ns pb4-ns ph5-ns ph3"
+    >
+    <h3 class="f4 fw8 mb0">Use o QR Code do Pix para doar</h3>
+    <br />
+    <p class="mb4 ph5-ns">
+      Abra o app em que vai fazer a transferência, escaneie a imagem ou cole o
+      código do QR Code
+    </p>
+    <br />
+    <img src="../../../../../assets/qrCode.png" alt="qrCode" />
+    <button id="copy-code" (click)="copyCode()" class="btn live-game-card">
+      <p *ngIf="!copiado">Copiar código do QR Code <i class="fa-solid fa-copy"></i></p>
+      <p *ngIf="copiado">Copiado! <i class="fa-solid fa-circle-check"></i></p>
+    </button>
+  </div>
+</section>
+</div>
+</main>

@@ -6,10 +6,6 @@
     (changeGameEvent)="gameChange($event)"
   ></app-game-selector>
   <app-game-header [matchDetails]="matchDetails"></app-game-header>
-  <!-- <div class="gameStatus container">
-    <h5>Input: {{val}}</h5>
-    <p-slider [(ngModel)]="val"></p-slider>
-  </div> -->
   <div *ngIf="gameInfo" class="d-flex justify-content-center">
     <app-game-information
       style="width: 100%"
@@ -22,13 +18,6 @@
     [gameFrame]="gameFrame"
     [matchID]="matchID"
   >
-    <!-- <iframe
-      title="twitchStream"
-      [src]="urlVideo | safe"
-      height="720"
-      width="1280"
-    >
-    </iframe> -->
     <div class="ytVod" *ngFor="let gameVod of totalGames" [ngClass]="{ 'esconder': gameVod.number != gameNumber || gameVod.state === 'inProgress' }">
       <div class="languageBar">
       <iframe
