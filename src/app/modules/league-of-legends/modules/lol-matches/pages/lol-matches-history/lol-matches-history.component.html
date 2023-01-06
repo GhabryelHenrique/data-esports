@@ -1,0 +1,29 @@
+<div class="nextGames">
+  <div class="headerTitle">
+    <div class="searchFilter">
+
+      <form class="search">
+        <input type="text" #input (keyup)="search(input.value)" placeholder="Pesquisar...">
+      </form>
+      <mat-form-field appearance="fill">
+        <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event)">
+          <mat-option
+          *ngFor="
+          let tournamentsPastFilter of setFilterLeagues(historyGames);
+          let i = index
+          "
+          [value]="tournamentsPastFilter.name"
+          >
+          <p>{{ tournamentsPastFilter.name }}</p>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+  <hr />
+  <app-schedule-games
+    game="League of Legends"
+    [isHistory]="true"
+    [dataSource]="dataSource"
+  ></app-schedule-games>
+</div>

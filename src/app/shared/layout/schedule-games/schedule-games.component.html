@@ -9,6 +9,12 @@
       [game]="game"
       [isHistory]="isHistory"
       [cardContent]="dataSource"
+      (proximaPagina)="eventProximaPagina($event)"
     ></card-match>
+    <button *ngIf="!isHistory" (click)="eventProximaPagina($event)"  class="btn moreGames"><p>
+      Carregar mais Jogos
+    </p>
+      <i class="fa-sharp fa-solid fa-arrow-right"></i>
+    </button>
   </div>
 </div>

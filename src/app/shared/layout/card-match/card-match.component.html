@@ -39,7 +39,6 @@
     </a>
   </div>
 </div>
-
 <div class="pagination">
-  <jw-pagination [items]="cardContent" [pageSize]="9" [maxPages]="10" (changePage)="onChangePage($event)"></jw-pagination>
+  <p-paginator [rows]="pager.totalPages" [totalRecords]="cardContent.length" [rowsPerPageOptions]="[10,20,30]" (onPageChange)="setPage($event)"></p-paginator>
 </div>

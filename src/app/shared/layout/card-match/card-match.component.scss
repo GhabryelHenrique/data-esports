@@ -18,3 +18,40 @@
   display: flex;
   flex-direction: row;
 }
+
+.moreGames {
+  background-color: var(--card-color);
+  color: var(--text);
+}
+
+button {
+  gap: 3%;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+i {
+  font-size: 17px;
+}
+
+:host::ng-deep {
+  .p-paginator {
+    background-color: var(--card-color);
+    color: var(--text);
+  }
+
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight,
+  .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover,
+  .p-paginator .p-paginator-first:not(.p-disabled):not(.p-highlight):hover,
+  .p-paginator .p-paginator-prev:not(.p-disabled):not(.p-highlight):hover,
+  .p-paginator .p-paginator-next:not(.p-disabled):not(.p-highlight):hover,
+  .p-paginator .p-paginator-last:not(.p-disabled):not(.p-highlight):hover,
+  .p-dropdown, .p-inputtext {
+    background-color: var(--background);
+    border: none;
+    color: var(--white);
+  }
+}

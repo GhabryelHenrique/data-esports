@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LolMatchesComponent } from './lol-matches.component';
+import { LolMatchesHistoryComponent } from './pages/lol-matches-history/lol-matches-history.component';
 import { LolMatchesLiveComponent } from './pages/lol-matches-live/lol-matches-live.component';
 
 const routes: Routes = [

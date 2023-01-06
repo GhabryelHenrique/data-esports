@@ -1,0 +1,63 @@
+::ng-deep .ant-dropdown-menu-item,
+.ant-dropdown-menu-submenu-title {
+  &:hover {
+    background-color: var(--green-black);
+    transition: 0.5s;
+    color: var(--background);
+  }
+}
+
+:host ::ng-deep {
+  .mdc-list-item__primary-text {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .mdc-text-field--filled {
+    background-color: var(--card-color) !important;
+    color: white !important;
+  }
+  .mat-mdc-select-value, .mat-mdc-select-arrow, .mat-mdc-select-placeholder  {
+    color: var(--text) !important;
+  }
+  .mdc-menu-surface--open  {
+    background: var(--card-color) !important;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper{
+    display: none;
+  }
+}
+
+mat-form-field {
+  width: 15%;
+}
+
+.searchFilter{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-color);
+  padding: 15px 20px;
+  border-radius: 5px;
+  width: 83%;
+  height: 3.5rem;
+}
+
+input {
+  width: 100%;
+  background: none;
+  font-size: 18px;
+  border: none;
+  color: var(--text)
+}
+
+input::placeholder {
+  color: var(--text)
+}

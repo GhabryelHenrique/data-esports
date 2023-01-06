@@ -1,0 +1,24 @@
+.moreGames{
+  background-color: var(--card-color);
+  color: var(--text);
+}
+
+.content{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+button{
+  gap: 3%;
+  transition: all 0.2s ease-in-out;
+  width: 20%;
+}
+
+button:hover{
+  transform: scale(1.05);
+}
+
+i {
+  font-size: 17px
+}

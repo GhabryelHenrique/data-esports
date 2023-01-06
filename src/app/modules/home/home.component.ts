@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   valScheduleMatches: Event[] = [];
   nextValScheduleMatches: Event[] = [];
   pastValScheduleMatches: Event[] = [];
-
+  pageToken?: string | null
   slugsTournament: TournamentElement[] = []
   teste : any[] = []
   dataSource: Event[] =[];
@@ -49,15 +49,35 @@ export class HomeComponent implements OnInit {
       .getLoLScheduleGames(pageToken ? pageToken : null)
       .subscribe((res: Schedule) => {
         this.loading = true;
+        this.pageToken = res.data.schedule.pages.newer ? res.data.schedule.pages.newer : null
         this.scheduleMatches = res.data.schedule.events
-
-
         this.nextScheduleMatches  = this.scheduleMatches.filter((obj: Event) => {
           return obj.state === 'unstarted';
         });
         this.dataSource = this.nextScheduleMatches
         this.loading = false;
       });
+  }
+
+  nextPage(){
+    if(this.pageToken){
+      this.scheduleGamesService
+      .getLoLScheduleGames(this.pageToken)
+      .subscribe((res: Schedule) => {
+        this.loading = true;
+
+        this.pageToken = res.data.schedule.pages.newer ? res.data.schedule.pages.newer : null
+
+        res.data.schedule.events.forEach(event => {
+          this.scheduleMatches.push(event)
+        })
+        this.nextScheduleMatches = this.scheduleMatches.filter((obj: Event) => {
+          return obj.state === 'unstarted';
+        });
+        this.dataSource = this.nextScheduleMatches
+        this.loading = false;
+      });
+    }
   }
 
   getLoLCompleteGames(tournamentId?: string | null){
@@ -136,12 +156,12 @@ search(search: string, reference: string){
       break
     case 'pastScheduleMatches':
       this.pastDataSource = this.pastScheduleMatches.filter((obj) => {
-        return obj.league.name.includes(search)
+        return obj.league.name.toLowerCase().includes(search.toLowerCase())
       })
       break
     case 'pastValScheduleMatches':
       this.pastValDataSource = this.pastValScheduleMatches.filter((obj) => {
-        return obj.league.name.includes(search)
+        return obj.league.name.toLowerCase().includes(search.toLowerCase())
       })
       break
     }

@@ -2,65 +2,99 @@
   <live game="League of Legends"></live>
 </div>
 
-<div class="d-flex" style="justify-content: center;">
-  <img src="../../../assets/lol-league-of-Legends-logo-4.png" width="10%" alt="League of Legends">
+<div class="d-flex" style="justify-content: center">
+  <img
+    src="../../../assets/lol-league-of-Legends-logo-4.png"
+    width="10%"
+    alt="League of Legends"
+  />
 </div>
 
-<div class="nextGames" *ngIf="nextScheduleMatches.length > 0">
+<div class="nextGames">
   <div class="headerTitle">
     <h2>Proximos Jogos</h2>
     <div class="searchFilter">
       <form class="search">
-        <input type="text" #input (keyup)="search(input.value, 'nextScheduleMatches')" placeholder="Pesquisar...">
+        <input
+          type="text"
+          #input
+          (keyup)="search(input.value, 'nextScheduleMatches')"
+          placeholder="Pesquisar..."
+        />
       </form>
       <mat-form-field appearance="fill">
-        <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'nextScheduleMatches')">
+        <mat-select
+          placeholder="Filtrar por liga"
+          (valueChange)="applyFilter($event, 'nextScheduleMatches')"
+        >
           <mat-option
-          *ngFor="
-          let tournamentsFilter of setFilterLeagues(nextScheduleMatches);
-          let i = index
-          "
-          [value]="tournamentsFilter.name"
+            *ngFor="
+              let tournamentsFilter of setFilterLeagues(nextScheduleMatches);
+              let i = index
+            "
+            [value]="tournamentsFilter.name"
           >
-          <p>{{ tournamentsFilter.name }}</p>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+            <p>{{ tournamentsFilter.name }}</p>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
+  <hr />
+  <div *ngIf="dataSource.length == 0">
+    <h4 style="text-align: center; margin-top: 10px">
+      Essa busca não foi encontrada!
+    </h4>
   </div>
-    <hr />
-    <app-schedule-games
-      game="League of Legends"
-      [dataSource]="dataSource"
-      [loading]="loading"
-    ></app-schedule-games>
+  <app-schedule-games
+    *ngIf="dataSource.length > 0"
+    game="League of Legends"
+    [dataSource]="dataSource"
+    (proximaPagina)="nextPage()"
+    [loading]="loading"
+  ></app-schedule-games>
 </div>
 
-<div class="nextGames" *ngIf="pastScheduleMatches.length > 0">
+<div class="nextGames">
   <div class="headerTitle">
     <h2>Jogos Anteriores</h2>
     <div class="searchFilter">
-
       <form class="search">
-        <input type="text" #input (keyup)="search(input.value, 'pastScheduleMatches')" placeholder="Pesquisar...">
+        <input
+          type="text"
+          #input
+          (keyup)="search(input.value, 'pastScheduleMatches')"
+          placeholder="Pesquisar..."
+        />
       </form>
       <mat-form-field appearance="fill">
-        <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'pastScheduleMatches')">
+        <mat-select
+          placeholder="Filtrar por liga"
+          (valueChange)="applyFilter($event, 'pastScheduleMatches')"
+        >
           <mat-option
-          *ngFor="
-          let tournamentsPastFilter of setFilterLeagues(pastScheduleMatches);
-          let i = index
-          "
-          [value]="tournamentsPastFilter.name"
+            *ngFor="
+              let tournamentsPastFilter of setFilterLeagues(
+                pastScheduleMatches
+              );
+              let i = index
+            "
+            [value]="tournamentsPastFilter.name"
           >
-          <p>{{ tournamentsPastFilter.name }}</p>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+            <p>{{ tournamentsPastFilter.name }}</p>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
-</div>
   <hr />
+  <div *ngIf="pastScheduleMatches.length == 0">
+    <h4 style="text-align: center; margin-top: 10px">
+      Essa busca não foi encontrada!
+    </h4>
+  </div>
   <app-schedule-games
+    *ngIf="pastDataSource.length > 0"
     game="League of Legends"
     [isHistory]="true"
     [dataSource]="pastDataSource"
@@ -68,47 +102,70 @@
   ></app-schedule-games>
 </div>
 
-<div class="d-flex" style="justify-content: center;">
-  <img src="../../../assets/valorant-logo-freelogovectors.net_-400x73.png" width="15%" alt="League of Legends">
+<div class="d-flex" style="justify-content: center">
+  <img
+    src="../../../assets/valorant-logo-freelogovectors.net_-400x73.png"
+    width="15%"
+    alt="League of Legends"
+  />
 </div>
 
-<div class="nextGames" *ngIf="nextValScheduleMatches.length > 0">
+<div class="nextGames">
   <div class="headerTitle">
     <h2>Proximos Jogos</h2>
   </div>
-    <hr />
-    <app-schedule-games
+  <hr />
+  <div *ngIf="nextValScheduleMatches.length == 0">
+    <h4 style="text-align: center; margin-top: 10px">
+      Essa busca não foi encontrada!
+    </h4>
+  </div>
+  <app-schedule-games
+    *ngIf="nextValScheduleMatches.length > 0"
     game="Valorant"
     [dataSource]="nextValScheduleMatches"
     [loading]="loading"
   ></app-schedule-games>
 </div>
 
-<div class="nextGames" *ngIf="pastValScheduleMatches.length > 0">
+<div class="nextGames">
   <div class="headerTitle">
     <h2>Jogos Anteriores</h2>
     <div class="searchFilter">
-
       <form class="search">
-        <input type="text" #input (keyup)="search(input.value,'pastValScheduleMatches')" placeholder="Pesquisar...">
+        <input
+          type="text"
+          #input
+          (keyup)="search(input.value, 'pastValScheduleMatches')"
+          placeholder="Pesquisar..."
+        />
       </form>
       <mat-form-field appearance="fill">
-        <mat-select placeholder="Filtrar por liga" (valueChange)="applyFilter($event, 'pastValScheduleMatches')">
-      <mat-option
-        *ngFor="
-        let tournamentsFilter of setFilterLeagues(pastValScheduleMatches);
-        let i = index
-        "
-        [value]="tournamentsFilter.name"
+        <mat-select
+          placeholder="Filtrar por liga"
+          (valueChange)="applyFilter($event, 'pastValScheduleMatches')"
         >
-        <p>{{ tournamentsFilter.name }}</p>
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-</div>
+          <mat-option
+            *ngFor="
+              let tournamentsFilter of setFilterLeagues(pastValScheduleMatches);
+              let i = index
+            "
+            [value]="tournamentsFilter.name"
+          >
+            <p>{{ tournamentsFilter.name }}</p>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
   <hr />
+  <div *ngIf="pastValScheduleMatches.length == 0">
+    <h4 style="text-align: center; margin-top: 10px">
+      Essa busca não foi encontrada!
+    </h4>
+  </div>
   <app-schedule-games
+    *ngIf="pastValDataSource.length > 0"
     game="Valorant"
     [isHistory]="true"
     [dataSource]="pastValDataSource"

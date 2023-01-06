@@ -13,6 +13,7 @@ import { AuthorizationTokenModule } from 'src/app/core/interceptors/authorizatio
 import {MatSelectModule} from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {SliderModule} from 'primeng/slider';
+import { LolMatchesHistoryComponent } from './pages/lol-matches-history/lol-matches-history.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -30,7 +31,7 @@ import {SliderModule} from 'primeng/slider';
     GameInformationModule,
     GameSelectorModule,
   ],
-  declarations: [LolMatchesComponent, LolMatchesLiveComponent],
+  declarations: [LolMatchesComponent, LolMatchesLiveComponent, LolMatchesHistoryComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
