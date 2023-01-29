@@ -27,8 +27,12 @@ export class GameInformationComponent implements OnInit {
         return Dragons.mountain
       case 'elder':
         return Dragons.elder
+      case 'chemtech':
+        return Dragons.chemtech
+      case 'hextech':
+        return Dragons.hextech
       default:
-        return
+        return ''
     }
   }
 }

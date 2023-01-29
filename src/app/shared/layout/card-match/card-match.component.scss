@@ -9,7 +9,8 @@
   color: var(--text);
 }
 
-.pagination {
+.paginação {
+  display: flex;
   margin: 2rem;
   justify-content: center;
 }
@@ -37,21 +38,38 @@ i {
   font-size: 17px;
 }
 
+jw-pagination {
+  width: 50%;
+}
+
 :host::ng-deep {
-  .p-paginator {
+  .pagination {
     background-color: var(--card-color);
-    color: var(--text);
+    padding: 5% 0;
+    border-radius: 10px;
+    gap: 2%;
+    justify-content: center;
   }
 
-  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight,
-  .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover,
-  .p-paginator .p-paginator-first:not(.p-disabled):not(.p-highlight):hover,
-  .p-paginator .p-paginator-prev:not(.p-disabled):not(.p-highlight):hover,
-  .p-paginator .p-paginator-next:not(.p-disabled):not(.p-highlight):hover,
-  .p-paginator .p-paginator-last:not(.p-disabled):not(.p-highlight):hover,
-  .p-dropdown, .p-inputtext {
-    background-color: var(--background);
+  .page-link {
+    border-radius: 50%;
     border: none;
-    color: var(--white);
+    display: flex;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    color: var(--text);
+    background: var(--background);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .active {
+    .page-link{
+
+      background: var(--card-color);
+      border: 2px solid var(--background);
+      color: var(--text);
+    }
   }
 }
