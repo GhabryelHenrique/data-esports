@@ -55,9 +55,9 @@ export interface LolVOD {
   mediaLocale: LolMediaLocale;
   provider: LolProvider;
   offset: number;
-  firstFrameTime: null | string;
-  startMillis: null;
-  endMillis: null;
+  firstFrameTime: string;
+  startMillis: number ;
+  endMillis: number;
 }
 
 export interface LolMediaLocale {

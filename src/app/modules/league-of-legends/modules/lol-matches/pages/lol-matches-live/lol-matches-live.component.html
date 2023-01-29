@@ -9,38 +9,149 @@
   <div *ngIf="gameInfo" class="d-flex justify-content-center">
     <app-game-information
       style="width: 100%"
-      [gameInfo]="gameInfo.frames.reverse()[0]"
+      [gameInfo]="gameInfo.frames[0]"
     ></app-game-information>
   </div>
-  <app-player-card
-    [gameInfo]="gameInfo"
-    [matchTournament]="matchTournament"
-    [gameFrame]="gameFrame"
-    [matchID]="matchID"
-  >
-    <div class="ytVod" *ngFor="let gameVod of totalGames" [ngClass]="{ 'esconder': gameVod.number != gameNumber || gameVod.state === 'inProgress' }">
-      <div class="languageBar">
-      <iframe
-        height="550"
-        title=""
-        width="955"
-        [src]="parameter | safe"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-      <div class="footerPlayer">
-        <form [formGroup]="form">
-          <mat-form-field appearance="fill">
-            <mat-select formControlName="website" (valueChange)="setVod($event)">
-              <mat-option *ngFor="let locale of gameVod.vods; let i = index" [value]="locale.locale">
-                <img with="30" alt="flag" height="30" [src]="setImagesCountry(locale.locale)">
-                <p>{{ setNameCountry(locale.locale) }}</p>
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </form>
+  <div *ngIf="gameInfo" class="cardPlayers">
+    <app-player-card
+      [gameInfo]="gameInfo"
+      [matchTournament]="matchTournament"
+      [gameFrame]="gameFrame"
+      [matchID]="matchID"
+    >
+      <div class="ytVod" *ngFor="let gameVod of totalGames; let i = index">
+        <div
+          class="languageBar"
+          [ngClass]="{
+            esconder: gameVod.number != gameNumber
+          }"
+        >
+          <div class="youtubePlayer" *ngIf="provider === 'youtube'">
+            <iframe
+              height="550"
+              title=""
+              width="955"
+              [src]="parameter | safe"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="trovoPlayer" *ngIf="provider === 'trovo'">
+            <iframe
+              height="550"
+              title=""
+              width="955"
+              [src]="parameter | safe"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="twitchPlayer" *ngIf="provider === 'twitch'">
+            <iframe
+              height="550"
+              title=""
+              width="955"
+              [src]="parameter | safe"
+              allowfullscreen
+              id="twitch-embed"
+            ></iframe>
+          </div>
+
+          <div class="footerPlayer">
+            <div class="languageStream d-flex">
+              <label for="locale">
+                <p>Linguagem</p>
+              </label>
+              <mat-form-field id="locale" appearance="fill">
+                <mat-select
+                  [(ngModel)]="localeVod"
+                  [ngModelOptions]="{ standalone: true }"
+                  (valueChange)="setVod($event, provider, gameVod.state)"
+                >
+                  <div *ngIf="gameVod.state !== 'inProgress'">
+                    <mat-option
+                      *ngFor="let locale of gameVod.vods; let i = index"
+                      [value]="locale.locale"
+                    >
+                      <img
+                        with="30"
+                        alt="flag"
+                        height="30"
+                        [src]="setImagesCountry(locale.locale)"
+                      />
+                      <p>{{ setNameCountry(locale.locale) }}</p>
+                    </mat-option>
+                  </div>
+                  <div *ngIf="gameVod.state === 'inProgress'">
+                    <mat-option
+                      *ngFor="let locale of matchStream; let i = index"
+                      [value]="locale.locale"
+                    >
+                      <img
+                        with="30"
+                        alt="flag"
+                        height="30"
+                        [src]="setImagesCountry(locale.locale)"
+                      />
+                      <p>{{ setNameCountry(locale.locale) }}</p>
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="providerStream d-flex">
+              <label for="player">
+                <p>Player</p>
+              </label>
+              <mat-form-field id="player" appearance="fill">
+                <mat-select
+                  [(ngModel)]="provider"
+                  (valueChange)="setVod(localeVod, $event, gameVod.state)"
+                  [ngModelOptions]="{ standalone: true }"
+                >
+                  <div *ngIf="gameVod.state !== 'inProgress'">
+                    <mat-option
+                      *ngFor="let locale of gameVod.vods; let i = index"
+                      [value]="locale.provider"
+                    >
+                    <img
+                    with="30"
+                    alt="flag"
+                    height="30"
+                    [src]="setImagesProviders(locale.locale)"
+                  />
+                      <p>{{ locale.provider | titlecase }}</p>
+                    </mat-option>
+                  </div>
+                  <div *ngIf="gameVod.state === 'inProgress'">
+                    <mat-option
+                      *ngFor="let locale of matchStream; let i = index"
+                      [value]="locale.provider"
+                    >
+                      <p>{{ locale.provider | titlecase }}</p>
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="channelPlayer" *ngIf="provider === 'twitch'" style="    text-align: center;
+            align-items: center;
+            display: flex;">
+              <p>
+                <strong>Canal:</strong>  {{providerVod | titlecase}}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      </div>
+    </app-player-card>
+  </div>
+
+  <div *ngIf="!gameInfo" class="waitGame">
+    <div class="waitGameText">
+      <p>Waiting for the game to start</p>
+      <p>{{ dots }}</p>
     </div>
-  </app-player-card>
+  </div>
 </div>

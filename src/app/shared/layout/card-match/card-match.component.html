@@ -5,7 +5,7 @@
       *ngFor="
         let item of pageOfItems
       "
-      (click)="click(item)"
+      (click)="selectgame(item)"
     >
       <div class="live-game-card">
         <h6 class="gameSchedule">
@@ -39,6 +39,6 @@
     </a>
   </div>
 </div>
-<div class="pagination">
-  <p-paginator [rows]="pager.totalPages" [totalRecords]="cardContent.length" [rowsPerPageOptions]="[10,20,30]" (onPageChange)="setPage($event)"></p-paginator>
+<div class="paginação">
+  <jw-pagination [items]="cardContent" [pageSize]="9" [maxPages]="5" (changePage)="onChangePage($event)"></jw-pagination>
 </div>

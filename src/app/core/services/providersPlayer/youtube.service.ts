@@ -4,11 +4,12 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class TwitchService {
-  apiUrl = environment.TWITCH_URL_STREAM;
+export class YoutubeService {
+  apiUrl = environment.PLAYERS_STREAM.YOUTUBE_URL_VOD;
+
   constructor() {}
 
-  streamLive(id: any) {
-    return `${this.apiUrl}?channel=${id}&parent=${window.location.host}`;
+  watchVod(parameter: string) {
+    return `${this.apiUrl}/${parameter}`;
   }
 }

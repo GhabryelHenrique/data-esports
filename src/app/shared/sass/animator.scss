@@ -130,7 +130,7 @@
   height: 1.35rem;
   border-radius: 9999px;
 }
-.gamestate-bg {
+.gamestate {
   width: 5.5rem;
   background-color: var(--red-secundary);
   animation: pulse 8s infinite;
@@ -140,4 +140,16 @@
   color: white;
   z-index: 1;
   animation: animate 8s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    color: white;
+  }
+  50% {
+    color: var(--red-secundary);
+  }
+  100% {
+    color: white;
+  }
 }

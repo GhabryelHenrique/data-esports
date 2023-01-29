@@ -16,12 +16,10 @@
           }}
         </p>
         <img
-          [src]="
-            baseUrl +
-            gameInfo.gameMetadata.blueTeamMetadata.participantMetadata[i]
-              .championId +
-            '.png'
-          "
+          [src]="baseUrl +
+          gameInfo.gameMetadata.blueTeamMetadata.participantMetadata[i]
+            .championId +
+          '.png'"
           [alt]="
             gameInfo.gameMetadata.blueTeamMetadata.participantMetadata[i]
               .championId

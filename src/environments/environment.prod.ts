@@ -22,6 +22,9 @@ export const environment = {
   },
   CHAMPIONS_URL:
     'https://ddragon.leagueoflegends.com/cdn/12.14.1/img/champion/',
-  TWITCH_URL_STREAM: 'https://player.twitch.tv/',
-  YOUTUBE_URL_VOD: 'https://www.youtube.com/embed',
+  PLAYERS_STREAM: {
+    TWITCH_URL_STREAM: 'https://player.twitch.tv/',
+    YOUTUBE_URL_VOD: 'https://www.youtube.com/embed',
+    TROVO_URL_VOD: 'https://player.trovo.live/embed/player',
+  }
 };

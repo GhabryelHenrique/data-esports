@@ -13,9 +13,9 @@ export class PlayerCardComponent {
   @Input() matchID: any;
   @Input() matchDetails?: any;
   @Input() matchTournament: any;
-  gameId?: number;
   @Input() gameInfo: any;
   @Input() gameFrame!: Frame;
+  gameId?: number;
 
   baseUrl = environment.CHAMPIONS_URL;
 

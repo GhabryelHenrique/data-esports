@@ -102,25 +102,42 @@ h4 {
 .footerPlayer {
   width: 100%;
   display: flex;
+  gap: 5%;
   background-color: var(--card-color);
   flex-direction: row-reverse;
 }
 
+.providerStream, .languageStream{
+flex-direction: column;
+margin-top: 15px;
+
+label {
+  margin: 0 0 5px -15px;
+}
+}
+
 :host ::ng-deep {
-  .mdc-list-item__primary-text {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  .mdc-text-field--filled {
-    margin: 15px 0 0 -15px !important;
-    background-color: var(--background) !important;
-    color: white !important;
-  }
   .mat-mdc-select-value, .mat-mdc-select-arrow  {
     color: var(--text) !important;
   }
   .mdc-menu-surface--open  {
     background: var(--background) !important;
   }
+
+
+.mdc-text-field--filled {
+  margin: 0 0 0 -15px !important;
+  background-color: var(--background) !important;
+  color: white !important;
+}
+}
+
+.waitGameText{
+  display: flex;
+    justify-content: center;
+    margin: 5% 0px 28% 0;
+
+    p{
+      font-size: 2.5rem;
+    }
 }

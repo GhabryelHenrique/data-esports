@@ -32,3 +32,15 @@ body {
   background-color: var(--background);
   color: var(--text);
 }
+
+.mdc-list-item__primary-text {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.mdc-menu-surface--open{
+  background-color: var(--background) !important;
+  color: var(--text) !important;
+}

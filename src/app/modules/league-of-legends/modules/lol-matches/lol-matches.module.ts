@@ -14,6 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {SliderModule} from 'primeng/slider';
 import { LolMatchesHistoryComponent } from './pages/lol-matches-history/lol-matches-history.component';
+import { ScheduleGamesModule } from 'src/app/shared/layout/schedule-games/schedule-games.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +25,7 @@ import { LolMatchesHistoryComponent } from './pages/lol-matches-history/lol-matc
     ReactiveFormsModule,
     FormsModule,
     AuthorizationTokenModule,
+    ScheduleGamesModule,
     MatSelectModule,
     GameHeaderModule,
     PipesModule,
@@ -33,8 +35,6 @@ import { LolMatchesHistoryComponent } from './pages/lol-matches-history/lol-matc
   ],
   declarations: [LolMatchesComponent, LolMatchesLiveComponent, LolMatchesHistoryComponent],
   schemas: [
-    CUSTOM_ELEMENTS_SCHEMA,
-    NO_ERRORS_SCHEMA
   ],
 })
 export class LolMatchesModule {}
