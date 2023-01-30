@@ -1,4 +1,4 @@
-<div class="gameStatus d-flex justify-content-between container p-5">
+<div class="gameStatus d-flex justify-content-between container p-5" *ngIf="gameInfo" >
   <div class="blueTeam">
     <ul class="d-flex justify-content-start w-30 blueInfo">
       <li class="d-flex flex-column align-items-center">
@@ -36,8 +36,11 @@
     </div>
   </div>
 
-  <div class="gamestate" *ngIf="gameInfo.gameState === 'in_game'" ><span class="aovivo">AO VIVO</span><div class="gamestate-bg"></div></div>
-  <div *ngIf="gameInfo.gameState === 'finished'" ><span>Finalizado</span></div>
+  <div *ngIf="gameInfo.gameState === 'in_game'" class="gamestate">
+    <span class="liveText">AO VIVO</span>
+    <div class="gamestate-bg"></div>
+  </div>
+  <div *ngIf="gameInfo.gameState === 'finished'" ><span class="finished">Finalizado</span></div>
 
 
   <div class="redTeam">
