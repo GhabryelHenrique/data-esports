@@ -1,11 +1,11 @@
-<div class="main">
+<div class="main" *ngIf="gameInfo">
   <app-game-selector
     [totalGames]="totalGames"
     [gameId]="gameId"
     [matchID]="matchID"
     (changeGameEvent)="gameChange($event)"
   ></app-game-selector>
-  <app-game-header [matchDetails]="matchDetails"></app-game-header>
+  <app-game-header *ngIf="matchDetails" [matchDetails]="matchDetails"></app-game-header>
   <div *ngIf="gameInfo" class="d-flex justify-content-center">
     <app-game-information
       style="width: 100%"
@@ -19,7 +19,9 @@
       [gameFrame]="gameFrame"
       [matchID]="matchID"
     >
-      <div class="ytVod" *ngFor="let gameVod of totalGames; let i = index">
+    <div *ngIf="!noVod">
+
+      <div class="ytVod" *ngFor="let gameVod of totalGames; let i = index" >
         <div
           class="languageBar"
           [ngClass]="{
@@ -145,6 +147,7 @@
           </div>
         </div>
       </div>
+    </div>
     </app-player-card>
   </div>
 

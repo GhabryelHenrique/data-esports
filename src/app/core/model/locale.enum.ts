@@ -7,8 +7,10 @@ export enum Locale {
   tr_TR = '../../../../../../../../../assets/flags/turquia.png',
   nl_NL = '../../../../../../../../../assets/flags/paises-baixos.png',
   pt_PT = '../../../../../../../../../assets/flags/portugal.png',
+  ko_KR = '../../../../../../../../../assets/flags/coreia-do-sul.png',
 
   en_US_Name = 'English',
+  ko_KR_Name = '한국어',
   es_ES_Name = 'Español (España)',
   es_MX_Name = 'Español (México)',
   it_IT_Name = 'Italiano',

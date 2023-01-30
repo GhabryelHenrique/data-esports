@@ -33,6 +33,7 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
   goRepeat = true;
   isLive: boolean = false;
   totalGames: LolGame[] = [];
+  noVod: boolean = false;
   val: any
   isHistory: boolean = false;
   gameNumber: number = 0;
@@ -82,7 +83,12 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
     } else {
       parameterFind = {parameter: this.matchStream[this.gameNumber - 1].parameter}
     }
-    this.providerVod = parameterFind.parameter
+
+    console.log(parameterFind)
+    if(!parameterFind){
+      this.noVod = true
+    }else {
+      this.providerVod = parameterFind.parameter
 
       if(provider === 'youtube'){
         this.parameter = this.getUrlVodYoutube(parameterFind.parameter)
@@ -93,6 +99,10 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
       if(provider === 'trovo'){
         this.parameter = this.getUrlVodTrovo(parameterFind.parameter)
       }
+      if(provider === 'afreeca'){
+        this.parameter = this.getUrlVodTwitch(parameterFind.parameter, parameterFind.startMillis, gameState)
+      }
+    }
   }
 
   msToTime(duration: number) {
@@ -140,7 +150,7 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
   getLiveGameDetails() {
     this.liveMatchStatsService
       .getGameDetails({ hl: 'pt-BR', id: this.matchID })
-      .subscribe((res: LolDataGameDetails) => {
+      .subscribe(async (res: LolDataGameDetails) => {
         this.matchTournament = res.data.event
         this.matchDetails = res.data.event.match;
         this.matchStream = res.data.event.streams;
@@ -158,19 +168,23 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
           this.isLive =  true
           this.localeVod = this.matchStream[0].locale
           this.provider = this.matchStream[0].provider
-          this.gameNumber = 1;
+          this.gameNumber = inProgressGame.number;
           this.gameState = this.totalGames[this.gameNumber - 1].state
-          this.getWindowGame();
-          this.getLiveGameStatus()
-          this.setVod(this.localeVod, this.provider, this.gameState)
+          await this.getWindowGame();
+          await this.getLiveGameStatus()
+          await this.setVod(this.localeVod, this.provider, this.gameState)
         } else {
           var last = this.totalGames[this.totalGames.length - 1];
           this.gameNumber = last.number;
           this.getHistory(last.id);
-          this.localeVod = this.totalGames[this.gameNumber - 1].vods[0].locale
-          this.provider = this.totalGames[this.gameNumber - 1].vods[0].provider
-          this.gameState = this.totalGames[this.gameNumber - 1].state
-          this.setVod(this.localeVod, this.provider, this.totalGames[this.gameNumber - 1].state)
+          if(this.totalGames[this.gameNumber - 1].vods.length === 0){
+            this.noVod = true
+          } else {
+            this.localeVod = this.totalGames[this.gameNumber - 1].vods[0].locale
+            this.provider = this.totalGames[this.gameNumber - 1].vods[0].provider
+            this.gameState = this.totalGames[this.gameNumber - 1].state
+            await this.setVod(this.localeVod, this.provider, this.totalGames[this.gameNumber - 1].state)
+          }
         }
 
       });
@@ -183,6 +197,7 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
     this.matchesService
       .getMatchesDetails(id, { startingTime: date })
       .subscribe((res: GameDetails) => {
+        res.frames = res.frames.reverse()
         this.gameInfo = res
         this.goRepeat = false;
       });
@@ -274,6 +289,8 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
         return Locale.tr_TR;
       case 'nl-NL':
         return Locale.nl_NL;
+      case 'ko-KR':
+        return Locale.ko_KR;
     default:
       return Locale.en_US;
     }
@@ -310,6 +327,8 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
         return Locale.tr_TR_Name;
       case 'nl-NL':
         return Locale.nl_NL_Name;
+      case 'ko-KR':
+        return Locale.ko_KR_Name;
     default:
       return Locale.en_US_Name;
     }
