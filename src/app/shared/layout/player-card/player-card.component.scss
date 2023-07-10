@@ -10,8 +10,12 @@
   margin: 1rem 0;
 }
 
+p, h5{
+  font-size: 15px;
+}
+
 img {
-  max-width: 6.75rem;
+  max-width: 3.5rem;
 }
 
 .status {
@@ -19,7 +23,7 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  width: 40%;
 }
 .statusRed {
   margin-right: 2rem;
@@ -41,7 +45,7 @@ img {
 
 .minions {
   color: #000;
-  width: 15px !important;
+  // width: 15px !important;
 }
 
 .vantage {
@@ -60,4 +64,10 @@ img {
   background-color: #5e676d;
   width: 20px;
   height: 20px;
+}
+
+::ng-deep {
+  .mdc-linear-progress__bar-inner{
+    border-color: var(--green) !important;
+  }
 }

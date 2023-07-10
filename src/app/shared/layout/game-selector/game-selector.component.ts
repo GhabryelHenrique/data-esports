@@ -10,6 +10,7 @@ import { LolGame } from 'src/app/modules/league-of-legends/modules/models/lol-ma
 export class GameSelectorComponent implements OnInit {
   @Input() totalGames?: LolGame[];
   @Input() gameId: any;
+  @Input() gameNumber: any;
   @Input() matchID: any;
 
   @Output() changeGameEvent: EventEmitter<LolGame> = new EventEmitter();
@@ -17,7 +18,8 @@ export class GameSelectorComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   changeGame(game: LolGame) {
     if (this.game === 'League of Legends') {

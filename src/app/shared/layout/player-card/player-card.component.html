@@ -1,146 +1,176 @@
 <div class="d-flex justify-content-between" style="width: 90vw; margin: 0 4vw">
   <div class="d-flex flex-column">
     <div
-      class="container"
+      class="container d-flex flex-column"
       *ngFor="
         let player of gameInfo.frames[0].blueTeam.participants;
         let i = index
       "
-      (click)="clickEventHandler(gameInfo.gameMetadata.blueTeamMetadata.participantMetadata[i])"
-    >
-      <div class="player">
-        <p class="playerName">
-          {{
-            gameInfo.gameMetadata.blueTeamMetadata.participantMetadata[i]
-              .summonerName
-          }}
-        </p>
-        <img
-          [src]="baseUrl +
+      (click)="
+        clickEventHandler(
           gameInfo.gameMetadata.blueTeamMetadata.participantMetadata[i]
-            .championId +
-          '.png'"
-          [alt]="
-            gameInfo.gameMetadata.blueTeamMetadata.participantMetadata[i]
-              .championId
-          "
-        />
-        <nz-badge nzNoAnimation [nzCount]="player.level">
-          <a class="head-example"></a>
-        </nz-badge>
+        )
+      "
+    >
+      <div class="d-flex flex-row">
+        <div class="player">
+          <p class="playerName">
+            {{
+              gameInfo.gameMetadata.blueTeamMetadata.participantMetadata[i]
+                .summonerName
+            }}
+          </p>
+          <img
+            [src]="
+              baseUrl +
+              gameInfo.gameMetadata.blueTeamMetadata.participantMetadata[i]
+                .championId +
+              '.png'
+            "
+            [alt]="
+              gameInfo.gameMetadata.blueTeamMetadata.participantMetadata[i]
+                .championId
+            "
+          />
+          <nz-badge nzNoAnimation [nzCount]="player.level">
+            <a class="head-example"></a>
+          </nz-badge>
+        </div>
+
+        <ul class="status">
+          <li class="pd-5 d-flex">
+            <img
+              class="icons"
+              alt="Icone de Kills"
+              src="../../../../assets/kill.svg"
+            />
+            <p>{{ player.kills }}/{{ player.deaths }}/{{ player.assists }}</p>
+          </li>
+          <li class="d-flex">
+            <img
+              src="../../../../assets/creep.png"
+              alt="Icone de Minions"
+              class="minions"
+            />
+            <p>{{ player.creepScore }}</p>
+          </li>
+          <li class="d-flex">
+            <img
+              src="../../../../assets/gold.svg"
+              alt="Icone de Gold"
+              class="goldPlayer gameLogo"
+            />
+            <p>{{ player.totalGold }}</p>
+          </li>
+          <li class="d-flex">
+            <h5 class="icons">+/-</h5>
+            <p
+              [ngClass]="{
+                vantage: getBlueDifference(i) > 0,
+                desvantage: getBlueDifference(i) < 0
+              }"
+            >
+              {{ getBlueDifference(i) }}
+            </p>
+          </li>
+        </ul>
       </div>
 
-      <ul class="status">
-        <li class="pd-5 d-flex">
-          <img
-            class="icons"
-            alt="Icone de Kills"
-            src="../../../../assets/kill.svg"
-          />
-          <p>{{ player.kills }}/{{ player.deaths }}/{{ player.assists }}</p>
-        </li>
-        <li class="d-flex">
-          <img
-            src="../../../../assets/creep.png"
-            alt="Icone de Minions"
-            class="minions"
-          />
-          <p>{{ player.creepScore }}</p>
-        </li>
-        <li class="d-flex">
-          <img
-            src="../../../../assets/gold.svg"
-            alt="Icone de Gold"
-            class="goldPlayer gameLogo"
-          />
-          <p>{{ player.totalGold }}</p>
-        </li>
-        <li class="d-flex">
-          <h5 class="icons">+/-</h5>
-          <p
-            [ngClass]="{
-              vantage: getBlueDifference(i) > 0,
-              desvantage: getBlueDifference(i) < 0
-            }"
-          >
-            {{ getBlueDifference(i) }}
-          </p>
-        </li>
-      </ul>
+      <div class="livePlayer mt-4 d-flex flex-column">
+        <mat-progress-bar
+          mode="determinate"
+          [value]="calculatePercentage(gameInfo.frames[0].blueTeam, i)"
+        ></mat-progress-bar>
+        <p style="align-self: center">
+          {{ player.currentHealth + "/" + player.maxHealth }}
+        </p>
+      </div>
     </div>
   </div>
 
-    <ng-content></ng-content>
+  <ng-content></ng-content>
 
   <div class="d-flex flex-column">
     <div
-      class="container flex-row-reverse"
+      class="container d-flex flex-column"
       *ngFor="
         let player of gameInfo.frames[0].redTeam.participants;
         let i = index
       "
     >
-      <div style="text-align: end">
-        <p class="playerName">
-          {{
-            gameInfo.gameMetadata.redTeamMetadata.participantMetadata[i]
-              .summonerName
-          }}
-        </p>
-        <nz-badge nzNoAnimation [nzCount]="player.level">
-          <a class="head-example"></a>
-        </nz-badge>
-        <img
-          [src]="
-            baseUrl +
-            gameInfo.gameMetadata.redTeamMetadata.participantMetadata[i]
-              .championId +
-            '.png'
-          "
-          [alt]="
-            gameInfo.gameMetadata.redTeamMetadata.participantMetadata[i]
-              .championId
-          "
-        />
-      </div>
-      <ul class="status statusRed">
-        <li class="pd-5 d-flex">
-          <p>{{ player.kills }}/{{ player.deaths }}/{{ player.assists }}</p>
-          <img
-            class="icons"
-            alt="Icone de Kills"
-            src="../../../../assets/kill.svg"
-          />
-        </li>
-        <li class="d-flex">
-          <p>{{ player.creepScore }}</p>
-          <img
-            src="../../../../assets/creep.png"
-            alt="Icone de Minions"
-            class="minions"
-          />
-        </li>
-        <li class="d-flex">
-          <p>{{ player.totalGold }}</p>
-
-          <img
-            src="../../../../assets/gold.svg"
-            alt="Icone de Gold"
-            class="goldPlayer gameLogo"
-          />
-        </li>
-        <li class="d-flex">
-          <p
-            [ngClass]="{
-              vantage: getRedDifference(i) > 0,
-              desvantage: getRedDifference(i) < 0
-            }"
-          >
-            {{ getRedDifference(i) }}
+      <div class="d-flex flex-row-reverse">
+        <div style="text-align: end">
+          <p class="playerName">
+            {{
+              gameInfo.gameMetadata.redTeamMetadata.participantMetadata[i]
+                .summonerName
+            }}
           </p>
-          <h5 class="icons">+/-</h5>
-        </li>
-      </ul>
+          <nz-badge nzNoAnimation [nzCount]="player.level">
+            <a class="head-example"></a>
+          </nz-badge>
+          <img
+            [src]="
+              baseUrl +
+              gameInfo.gameMetadata.redTeamMetadata.participantMetadata[i]
+                .championId +
+              '.png'
+            "
+            [alt]="
+              gameInfo.gameMetadata.redTeamMetadata.participantMetadata[i]
+                .championId
+            "
+          />
+        </div>
+        <ul class="status statusRed">
+          <li class="pd-5 d-flex">
+            <p>{{ player.kills }}/{{ player.deaths }}/{{ player.assists }}</p>
+            <img
+              class="icons"
+              alt="Icone de Kills"
+              src="../../../../assets/kill.svg"
+            />
+          </li>
+          <li class="d-flex">
+            <p>{{ player.creepScore }}</p>
+            <img
+              src="../../../../assets/creep.png"
+              alt="Icone de Minions"
+              class="minions"
+            />
+          </li>
+          <li class="d-flex">
+            <p>{{ player.totalGold }}</p>
+
+            <img
+              src="../../../../assets/gold.svg"
+              alt="Icone de Gold"
+              class="goldPlayer gameLogo"
+            />
+          </li>
+          <li class="d-flex">
+            <p
+              [ngClass]="{
+                vantage: getRedDifference(i) > 0,
+                desvantage: getRedDifference(i) < 0
+              }"
+            >
+              {{ getRedDifference(i) }}
+            </p>
+            <h5 class="icons">+/-</h5>
+          </li>
+        </ul>
+      </div>
+
+      <div class="livePlayer mt-4 d-flex flex-column">
+        <mat-progress-bar
+          mode="determinate"
+          [value]="calculatePercentage(gameInfo.frames[0].redTeam, i)"
+        ></mat-progress-bar>
+        <p style="align-self: center">
+          {{ player.currentHealth + "/" + player.maxHealth }}
+        </p>
+      </div>
     </div>
   </div>
 </div>

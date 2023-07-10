@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   pageToken?: string | null
   slugsTournament: TournamentElement[] = []
   teste : any[] = []
-  dataSource: Event[] =[];
+  dataSource!: Event[];
   pastDataSource: Event[] =[];
   pastValDataSource: Event[] = [];
 
@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
     this.getLoLScheduleGames();
     this.getLoLCompleteGames();
     this.getTournamentsForLeague()
+
   }
 
   getLoLScheduleGames(pageToken?: string | null) {

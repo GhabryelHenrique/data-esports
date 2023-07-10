@@ -1,25 +1,30 @@
-import { LolEvent } from './../../../modules/league-of-legends/modules/models/lol-matches.model';
 import { PlayersService } from './../../../core/services/players/players.service';
 import { environment } from './../../../../environments/environment';
 import { Component, Input, OnInit } from '@angular/core';
-import { Frame } from 'src/app/modules/league-of-legends/modules/models/lol-game-detais.model';
+import { GameFrameService } from 'src/app/core/services/game/gameFrame.service';
 
 @Component({
   selector: 'app-player-card',
   templateUrl: './player-card.component.html',
   styleUrls: ['./player-card.component.scss'],
 })
-export class PlayerCardComponent {
+export class PlayerCardComponent implements OnInit {
   @Input() matchID: any;
   @Input() matchDetails?: any;
   @Input() matchTournament: any;
   @Input() gameInfo: any;
-  @Input() gameFrame!: Frame;
+
   gameId?: number;
 
   baseUrl = environment.CHAMPIONS_URL;
 
-  constructor(private playersService: PlayersService){}
+  constructor(
+    private playersService: PlayersService,
+    private gameFrameService: GameFrameService
+  ) {}
+
+  ngOnInit(): void {
+  }
 
   getBlueDifference(i: number) {
     return (
@@ -35,9 +40,29 @@ export class PlayerCardComponent {
     );
   }
 
-  clickEventHandler(player: any){
-    this.playersService.getPlayers(player.esportsPlayerId, this.matchTournament.tournament.id).subscribe((res) => {
-      console.log(res)
-    })
+  clickEventHandler(player: any) {
+    this.playersService
+      .getPlayers(player.esportsPlayerId, this.matchTournament.tournament.id)
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+
+  calculatePercentage(team: any, playerIndex: any) {
+    if (!team || playerIndex < 0 || playerIndex >= team.participants.length) {
+      return 0;
+    }
+
+    const participant = team.participants[playerIndex];
+
+    if (!participant || participant.maxHealth === 0) {
+      return 0;
+    }
+
+    const fullValue = participant.maxHealth;
+    const partialValue = participant.currentHealth;
+
+    const percentage = (100 * partialValue) / fullValue;
+    return Math.round(percentage * 100) / 100; // Arredonda para duas casas decimais
   }
 }

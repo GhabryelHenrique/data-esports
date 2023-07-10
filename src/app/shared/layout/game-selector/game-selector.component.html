@@ -2,7 +2,8 @@
   <a
     *ngFor="let gameChange of totalGames"
     class="game-selector-item"
+    [ngClass]="gameChange.number === gameNumber ? 'actualGame': ''"
     (click)="changeGame(gameChange)"
-    ><span class="{{ gameChange.state }}">{{ gameChange.number }}</span></a
+    ><span>{{ gameChange.number }}</span></a
   >
 </div>

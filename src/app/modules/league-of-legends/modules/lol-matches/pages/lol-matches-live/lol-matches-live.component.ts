@@ -1,3 +1,4 @@
+import { GameFrameService } from 'src/app/core/services/game/gameFrame.service';
 import { TrovoService } from './../../../../../../core/services/providersPlayer/trovo.service';
 import { Providers } from './../../../../../../core/model/provider.enum';
 import { Frame, GameDetails } from './../../../models/lol-game-detais.model';
@@ -8,7 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatchesService } from 'src/app/modules/league-of-legends/services/matches/matches.service';
 import { TwitchService } from '../../../../../../core/services/providersPlayer/twitch.service';
 import { LiveMatchStatsService } from '../../../../services/live-match-stats/live-match-stats.service';
-import { LolDataGameDetails, LolEvent, LolVOD } from '../../../models/lol-matches.model';
+import {
+  LolDataGameDetails,
+  LolEvent,
+  LolVOD,
+} from '../../../models/lol-matches.model';
 import { LolGame, LolMatch } from './../../../models/lol-matches.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UseStateService } from '../../services/useState.service';
@@ -26,26 +31,26 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
   gameId: number | string = '';
   urlVod?: string;
   gameInfo: GameDetails = new GameDetails();
-  parameter: string = ''
+  parameter: string = '';
   matchStream: any[] = [];
   gameFrame: any;
-  selectedOption = 'en-US'
+  selectedOption = 'en-US';
   goRepeat = true;
   isLive: boolean = false;
   totalGames: LolGame[] = [];
   noVod: boolean = false;
-  val: any
   isHistory: boolean = false;
   gameNumber: number = 0;
   currentLocale?: string;
   form: FormGroup = new FormGroup({});
   localeArr: any[] = [];
   matchTournament?: LolEvent;
-  dots: string = ''
-  localeVod: string = ''
-  gameState: string = ''
-  provider: string = ''
-  providerVod: string = ''
+  dots: string = '';
+  localeVod: string = '';
+  gameState: string = '';
+  provider: string = '';
+  providerVod: string = '';
+  providersArray: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -53,14 +58,14 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
     private matchesService: MatchesService,
     private liveMatchStatsService: LiveMatchStatsService,
     private twitchService: TwitchService,
-    private trovoService : TrovoService,
+    private trovoService: TrovoService,
     private youtubeService: YoutubeService,
     private fb: FormBuilder,
-    private useStateService: UseStateService
+    private gameFrameService: GameFrameService
   ) {
-    this.form = fb.group({
+    this.form = this.fb.group({
       website: [this.selectedOption, [Validators.required]],
-    })
+    });
   }
 
   ngOnInit() {
@@ -72,35 +77,45 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
     this.goRepeat = false;
   }
 
-  setVod(locale: string, provider: string, gameState: string) {
-    var parameterFind: LolVOD | any
+  async setVod(locale: string, provider: string, gameState: string) {
+    var parameterFind: LolVOD | any;
 
-    if(gameState !== 'inProgress'){
-
-      parameterFind = this.totalGames[this.gameNumber - 1].vods.find((obj: LolVOD) => {
-        return obj.locale === locale && obj.provider === provider;
-      }) as LolVOD;
+    if (gameState !== 'inProgress') {
+      parameterFind = this.totalGames[this.gameNumber - 1].vods.find(
+        (obj: LolVOD) => {
+          return obj.locale === locale && obj.provider === provider;
+        }
+      ) as LolVOD;
     } else {
-      parameterFind = {parameter: this.matchStream[this.gameNumber - 1].parameter}
+      parameterFind = {
+        parameter: this.matchStream[this.gameNumber - 1].parameter,
+      };
     }
 
-    console.log(parameterFind)
-    if(!parameterFind){
-      this.noVod = true
-    }else {
-      this.providerVod = parameterFind.parameter
+    if (!parameterFind) {
+      this.noVod = true;
+    } else {
+      this.providerVod = parameterFind.parameter;
 
-      if(provider === 'youtube'){
-        this.parameter = this.getUrlVodYoutube(parameterFind.parameter)
+      if (provider === 'youtube') {
+        this.parameter = this.getUrlVodYoutube(parameterFind.parameter);
       }
-      if(provider === 'twitch'){
-        this.parameter = this.getUrlVodTwitch(parameterFind.parameter, parameterFind.startMillis, gameState)
+      if (provider === 'twitch') {
+        this.parameter = this.getUrlVodTwitch(
+          parameterFind.parameter,
+          parameterFind.startMillis,
+          gameState
+        );
       }
-      if(provider === 'trovo'){
-        this.parameter = this.getUrlVodTrovo(parameterFind.parameter)
+      if (provider === 'trovo') {
+        this.parameter = this.getUrlVodTrovo(parameterFind.parameter);
       }
-      if(provider === 'afreeca'){
-        this.parameter = this.getUrlVodTwitch(parameterFind.parameter, parameterFind.startMillis, gameState)
+      if (provider === 'afreeca') {
+        this.parameter = this.getUrlVodTwitch(
+          parameterFind.parameter,
+          parameterFind.startMillis,
+          gameState
+        );
       }
     }
   }
@@ -111,11 +126,11 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
       minutes: number | string = Math.floor((duration / (1000 * 60)) % 60),
       hours: number | string = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
 
-    return hours + "h" + minutes + "m" + seconds + "s";
+    return hours + 'h' + minutes + 'm' + seconds + 's';
   }
 
   gameChange(game: LolGame) {
@@ -137,13 +152,13 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
   }
 
   getUrlVodTwitch(parameter: string, time: number, gameState?: string) {
-    if(gameState === 'inProgress'){
+    if (gameState === 'inProgress') {
       return this.twitchService.watchLive(parameter);
     }
     return this.twitchService.watchVod(parameter, this.msToTime(time));
   }
 
-  getUrlVodTrovo(parameter: string){
+  getUrlVodTrovo(parameter: string) {
     return this.trovoService.watchLive(parameter);
   }
 
@@ -151,7 +166,7 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
     this.liveMatchStatsService
       .getGameDetails({ hl: 'pt-BR', id: this.matchID })
       .subscribe(async (res: LolDataGameDetails) => {
-        this.matchTournament = res.data.event
+        this.matchTournament = res.data.event;
         this.matchDetails = res.data.event.match;
         this.matchStream = res.data.event.streams;
 
@@ -159,46 +174,51 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
           return obj.state != 'unneeded' && obj.state != 'unstarted';
         });
 
-         const inProgressGame = this.totalGames.find((element: any) => {
+        const inProgressGame = this.totalGames.find((element: any) => {
           return element.state === 'inProgress';
         });
 
         if (inProgressGame) {
-          this.gameId = inProgressGame.id
-          this.isLive =  true
-          this.localeVod = this.matchStream[0].locale
-          this.provider = this.matchStream[0].provider
+          this.gameId = inProgressGame.id;
+          this.isLive = true;
+          this.localeVod = this.matchStream[0].locale;
+          this.provider = this.matchStream[0].provider;
           this.gameNumber = inProgressGame.number;
-          this.gameState = this.totalGames[this.gameNumber - 1].state
-          await this.getWindowGame();
-          await this.getLiveGameStatus()
-          await this.setVod(this.localeVod, this.provider, this.gameState)
+          this.gameState = this.totalGames[this.gameNumber - 1].state;
+          this.getWindowGame();
+          this.getLiveGameStatus();
+          await this.setVod(this.localeVod, this.provider, this.gameState);
         } else {
-          var last = this.totalGames[this.totalGames.length - 1];
+          const last = this.totalGames[this.totalGames.length - 1];
           this.gameNumber = last.number;
           this.getHistory(last.id);
-          if(this.totalGames[this.gameNumber - 1].vods.length === 0){
-            this.noVod = true
+          this.getLiveGameStatus();
+          if (this.totalGames[this.gameNumber - 1].vods.length === 0) {
+            this.noVod = true;
           } else {
-            this.localeVod = this.totalGames[this.gameNumber - 1].vods[0].locale
-            this.provider = this.totalGames[this.gameNumber - 1].vods[0].provider
-            this.gameState = this.totalGames[this.gameNumber - 1].state
-            await this.setVod(this.localeVod, this.provider, this.totalGames[this.gameNumber - 1].state)
+            this.localeVod =
+              this.totalGames[this.gameNumber - 1].vods[0].locale;
+            this.provider =
+              this.totalGames[this.gameNumber - 1].vods[0].provider;
+            this.gameState = this.totalGames[this.gameNumber - 1].state;
+            await this.setVod(
+              this.localeVod,
+              this.provider,
+              this.totalGames[this.gameNumber - 1].state
+            );
           }
         }
-
       });
-
   }
 
-  getHistory(id: any) {
+  async getHistory(id: any) {
     this.gameId = id;
     const date = this.getISODateMultiplyOf10();
     this.matchesService
       .getMatchesDetails(id, { startingTime: date })
       .subscribe((res: GameDetails) => {
-        res.frames = res.frames.reverse()
-        this.gameInfo = res
+        res.frames = res.frames.reverse();
+        this.gameInfo = res;
         this.goRepeat = false;
       });
   }
@@ -209,43 +229,46 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
     });
   }
 
-  getWindowGame() {
+  async getWindowGame() {
     const date = this.getISODateMultiplyOf10();
     this.liveMatchStatsService
       .getWindow(this.gameId, { hl: 'pt-BR', startingTime: date })
       .subscribe((res: any) => {
-        this.loadDots()
-        res.frames = res.frames.reverse()
+        this.loadDots();
+        res.frames = res.frames.reverse();
 
-        this.gameInfo = res
-        this.repeat()
-        if(this.gameInfo.frames[0].gameState == 'finished'){
-          this.goRepeat = false
+        this.gameInfo = res;
+        this.repeat();
+        if (this.gameInfo.frames[0].gameState == 'finished') {
+          this.goRepeat = false;
         }
       });
   }
 
   loadDots() {
-    if(!this.gameInfo){
-      this.dots = this.dots + '.'
-      if(this.dots.length > 3){
-        this.dots = ''
-        setTimeout(() => {this.loadDots()}, 500);
+    if (!this.gameInfo) {
+      this.dots = this.dots + '.';
+      if (this.dots.length > 3) {
+        this.dots = '';
+        setTimeout(() => {
+          this.loadDots();
+        }, 500);
       }
     }
   }
 
   getLiveGameStatus() {
     const date = this.getISODateMultiplyOf10();
-     this.liveMatchStatsService
+    this.liveMatchStatsService
       .getLiveDetailsGame(this.gameId, { hl: 'pt-BR', startingTime: date })
       .subscribe((res: any) => {
-
-        if(res.frames.reverse()[0].gameState == 'finished'){
-          this.goRepeat = false
+        if (res.frames.reverse()[0].gameState == 'finished') {
+          this.goRepeat = false;
         }
 
-        this.gameFrame = res
+        this.gameFrame = res;
+
+        this.gameFrameService.setValue(res.frames.reverse()[0]);
       });
   }
 
@@ -291,12 +314,12 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
         return Locale.nl_NL;
       case 'ko-KR':
         return Locale.ko_KR;
-    default:
-      return Locale.en_US;
+      default:
+        return Locale.en_US;
     }
   }
 
-  setImagesProviders(provider: string) {
+  setImagesProviders(provider: string, locale: any) {
     switch (provider) {
       case 'twitch':
         return Providers.twitch;
@@ -304,8 +327,8 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
         return Providers.youtube;
       case 'trovo':
         return Providers.trovo;
-    default:
-      return Providers.twitch;
+      default:
+        return Providers.twitch;
     }
   }
 
@@ -329,12 +352,16 @@ export class LolMatchesLiveComponent implements OnInit, OnDestroy {
         return Locale.nl_NL_Name;
       case 'ko-KR':
         return Locale.ko_KR_Name;
-    default:
-      return Locale.en_US_Name;
+      default:
+        return Locale.en_US_Name;
     }
   }
 
-  get f(){
+  get f() {
     return this.form.controls;
+  }
+
+  setGameVod(gameVod: any) {
+    return gameVod;
   }
 }

@@ -3,6 +3,7 @@
     [totalGames]="totalGames"
     [gameId]="gameId"
     [matchID]="matchID"
+    [gameNumber]="gameNumber"
     (changeGameEvent)="gameChange($event)"
   ></app-game-selector>
   <app-game-header *ngIf="matchDetails" [matchDetails]="matchDetails"></app-game-header>
@@ -16,12 +17,11 @@
     <app-player-card
       [gameInfo]="gameInfo"
       [matchTournament]="matchTournament"
-      [gameFrame]="gameFrame"
       [matchID]="matchID"
     >
     <div *ngIf="!noVod">
 
-      <div class="ytVod" *ngFor="let gameVod of totalGames; let i = index" >
+      <div class="ytVod" *ngFor="let gameVod of setGameVod(totalGames); let i = index" >
         <div
           class="languageBar"
           [ngClass]="{
@@ -121,9 +121,9 @@
                     with="30"
                     alt="flag"
                     height="30"
-                    [src]="setImagesProviders(locale.locale)"
+                    [src]="setImagesProviders(locale.provider, locale)"
                   />
-                      <p>{{ locale.provider | titlecase }}</p>
+                      <p>{{ locale.mediaLocale.translatedName | titlecase }}</p>
                     </mat-option>
                   </div>
                   <div *ngIf="gameVod.state === 'inProgress'">
@@ -131,13 +131,13 @@
                       *ngFor="let locale of matchStream; let i = index"
                       [value]="locale.provider"
                     >
-                      <p>{{ locale.provider | titlecase }}</p>
+                      <p>{{ locale.mediaLocale.translatedName | titlecase }}</p>
                     </mat-option>
                   </div>
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="channelPlayer" *ngIf="provider === 'twitch'" style="    text-align: center;
+            <div class="channelPlayer" *ngIf="provider === 'twitch'" style="text-align: center;
             align-items: center;
             display: flex;">
               <p>

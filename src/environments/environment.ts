@@ -22,6 +22,7 @@ export const environment = {
   },
   CHAMPIONS_URL:
     'https://ddragon.leagueoflegends.com/cdn/12.14.1/img/champion/',
+  ITEMS_URL : "https://ddragon.bangingheads.net/cdn/latest/img/item/",
   PLAYERS_STREAM: {
     TWITCH_URL_STREAM: 'https://player.twitch.tv/',
     YOUTUBE_URL_VOD: 'https://www.youtube.com/embed',

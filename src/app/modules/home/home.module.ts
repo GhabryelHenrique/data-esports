@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { LiveModule } from 'src/app/shared/live/live.module';
 import { RouterModule, Routes } from '@angular/router';
 import { DonateComponent } from './pages/donate/donate.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
     CommonModule,
     LiveModule,
     ScheduleGamesModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     RouterModule.forChild(routes),
   ],

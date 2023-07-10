@@ -107,37 +107,39 @@ h4 {
   flex-direction: row-reverse;
 }
 
-.providerStream, .languageStream{
-flex-direction: column;
-margin-top: 15px;
+.providerStream,
+.languageStream {
+  flex-direction: column;
+  margin-top: 15px;
+  width: 25%;
 
-label {
-  margin: 0 0 5px -15px;
-}
+  label {
+    margin: 0 0 5px -15px;
+  }
 }
 
 :host ::ng-deep {
-  .mat-mdc-select-value, .mat-mdc-select-arrow  {
+  .mat-mdc-select-value,
+  .mat-mdc-select-arrow {
     color: var(--text) !important;
   }
-  .mdc-menu-surface--open  {
+  .mdc-menu-surface--open {
     background: var(--background) !important;
   }
 
-
-.mdc-text-field--filled {
-  margin: 0 0 0 -15px !important;
-  background-color: var(--background) !important;
-  color: white !important;
+  .mdc-text-field--filled {
+    margin: 0 0 0 -15px !important;
+    background-color: var(--background) !important;
+    color: white !important;
+  }
 }
-}
 
-.waitGameText{
+.waitGameText {
   display: flex;
-    justify-content: center;
-    margin: 5% 0px 28% 0;
+  justify-content: center;
+  margin: 5% 0px 28% 0;
 
-    p{
-      font-size: 2.5rem;
-    }
+  p {
+    font-size: 2.5rem;
+  }
 }
